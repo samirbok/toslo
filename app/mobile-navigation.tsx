@@ -1,7 +1,6 @@
 "use client";
 
 import { translator, type Locale } from "./i18n/translations";
-import LanguagePicker from "./language-picker";
 import { useRef } from "react";
 
 export default function MobileNavigation({ home = false, locale = "en" }: { home?: boolean; locale?: Locale }) {
@@ -33,7 +32,6 @@ export default function MobileNavigation({ home = false, locale = "en" }: { home
         {links.map(([label, href]) => (
           <a key={label} href={href} onClick={() => { if (menuRef.current) menuRef.current.open = false; }} className="flex min-h-12 items-center rounded-lg px-3 text-sm font-medium text-[#111111] hover:bg-[#ECFDF5] focus-visible:outline-2 focus-visible:outline-[#00875A]">{t(label)}</a>
         ))}
-        <div className="border-t border-gray-200 py-4"><LanguagePicker locale={locale} destination={home ? "/" : "/services"} /></div>
       </div>
     </details>
   );

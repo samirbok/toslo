@@ -13,3 +13,4 @@ export const contactWhatsAppUrl = createWhatsAppUrl("I have a question.");
 export const deliveryPhone = "0664967161";
 export const deliveryPhoneUrl = "tel:+212664967161";
 export const instagramUrl = "https://www.instagram.com/toslo_delivery/";
+export const tiktokUrl = "https://www.tiktok.com/@toslo_delivery";

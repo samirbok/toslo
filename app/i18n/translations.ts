@@ -5,6 +5,7 @@ export function isLocale(value: unknown): value is Locale {
 }
 // English source strings remain stable keys; names and numbers need no translation.
 const translations: Record<string, [string, string]> = {
+"TikTok": ["TikTok", "تيك توك"],
 "Services": ["Services", "الخدمات"],
 "How it works": ["Comment ça marche", "كيف تعمل الخدمة"],
 "Pricing": ["Tarifs", "الأسعار"],

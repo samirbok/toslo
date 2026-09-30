@@ -1,3 +1,6 @@
+"use client";
+
+import { useOptimistic } from "react";
 import { chooseLanguage } from "./i18n/actions";
 import { languageNames, translator, type Locale } from "./i18n/translations";
 
@@ -5,13 +8,19 @@ const languageFlags: Record<Locale, string> = { en: "🇬🇧", fr: "🇫🇷", 
 
 export default function LanguagePicker({ locale, destination = "/" }: { locale?: Locale; destination?: string }) {
   const t = translator(locale ?? "en");
+  const [selected, setSelected] = useOptimistic<Locale | undefined>(locale);
+  async function selectLanguage(formData: FormData) {
+    const language = formData.get("language");
+    if (language === "en" || language === "fr" || language === "ar") setSelected(language);
+    await chooseLanguage(formData);
+  }
   return (
-    <form action={chooseLanguage}>
+    <form action={selectLanguage}>
       <input type="hidden" name="destination" value={destination} />
       <fieldset className="flex flex-wrap items-center justify-center gap-2" dir="ltr">
         <legend className={locale ? "mb-3 w-full text-center text-sm text-gray-600" : "sr-only"}>{t("Change language")}</legend>
         {(Object.keys(languageNames) as Locale[]).map(language => (
-          <button key={language} type="submit" name="language" value={language} lang={language} aria-label={languageNames[language]} aria-pressed={locale ? locale === language : undefined} className={`flex min-h-20 min-w-16 flex-col items-center justify-center gap-2 rounded-xl px-3 py-2 text-xs font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#00875A] sm:px-5 ${locale === language ? "bg-[#ECFDF5] text-[#007D53] ring-1 ring-[#00875A]/25" : "text-gray-600 hover:bg-[#ECFDF5] hover:text-[#007D53]"}`}>
+          <button key={language} type="submit" name="language" value={language} lang={language} aria-label={languageNames[language]} aria-pressed={selected === language} className={`flex min-h-24 min-w-16 cursor-pointer flex-col items-center justify-center gap-3 rounded-2xl border px-3 py-4 text-xs font-semibold shadow-sm transition-[background-color,border-color,box-shadow,transform] duration-200 active:scale-95 active:border-[#00875A] active:bg-[#ECFDF5] motion-reduce:transform-none motion-reduce:transition-none focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#00875A] sm:px-5 ${selected === language ? "border-[#00875A] bg-[#ECFDF5] text-[#007D53] ring-1 ring-[#00875A]/20" : "border-gray-200 bg-white text-gray-600 hover:border-[#00875A]/50 hover:bg-[#ECFDF5] hover:text-[#007D53] hover:shadow-md"}`}>
             <span aria-hidden="true" className="text-4xl leading-none">{languageFlags[language]}</span>
             <span>{languageNames[language]}</span>
           </button>
@@ -23,12 +32,12 @@ export default function LanguagePicker({ locale, destination = "/" }: { locale?:
 
 export function LanguageWelcome({ destination = "/" }: { destination?: string }) {
   return (
-    <main className="flex min-h-dvh items-center justify-center bg-[#FAFAF8] px-6 py-12" dir="ltr">
-      <section aria-labelledby="language-heading" className="w-full max-w-lg rounded-3xl border border-gray-200 bg-white p-6 text-center shadow-sm sm:p-10">
+    <main className="flex min-h-dvh items-center justify-center bg-[#FAFAF8] px-6 pt-8 pb-24 sm:pb-32" dir="ltr">
+      <section aria-labelledby="language-heading" className="w-full max-w-lg rounded-3xl border border-gray-200 bg-white px-6 py-8 text-center shadow-sm sm:p-10">
         <p className="text-4xl font-extrabold tracking-tight text-[#00875A]">Toslo.</p>
-        <h1 id="language-heading" className="mt-8 text-2xl font-bold text-[#111111]">Choose your language</h1>
+        <h1 id="language-heading" className="mt-8 text-2xl font-bold text-[#111111]">Choose your preferred language</h1>
         <p lang="fr" className="mt-3 text-gray-600">Choisissez votre langue</p>
-        <p lang="ar" dir="rtl" className="mt-3 text-lg text-gray-600">اختر لغتك</p>
+        <p lang="ar" dir="rtl" className="mt-3 text-xl leading-8 text-gray-600">اختر لغتك</p>
         <div className="mt-8"><LanguagePicker destination={destination} /></div>
       </section>
     </main>

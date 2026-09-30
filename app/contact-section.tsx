@@ -1,5 +1,5 @@
 import { translator, type Locale } from "./i18n/translations";
-import { createWhatsAppUrl, deliveryPhone, deliveryPhoneUrl, instagramUrl } from "./contact-links";
+import { createWhatsAppUrl, deliveryPhone, deliveryPhoneUrl, instagramUrl, tiktokUrl } from "./contact-links";
 
 export default function ContactSection({ locale = "en" }: { locale?: Locale }) {
   const t = translator(locale);
@@ -38,10 +38,14 @@ export default function ContactSection({ locale = "en" }: { locale?: Locale }) {
             })}
           </ul>
           <div className="mt-5 flex flex-wrap items-center justify-center gap-x-4 gap-y-3 border-t border-gray-100 pt-5 sm:mt-6 sm:pt-6">
-            <p className="text-sm font-medium text-gray-600">{t("Follow Toslo")}</p>
+            <p className="text-sm font-medium text-gray-600 max-sm:w-full max-sm:text-center">{t("Follow Toslo")}</p>
             <a href={instagramUrl} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center gap-2 rounded-full border border-pink-100 bg-pink-50 px-4 py-2 text-sm font-semibold text-pink-800 transition-colors hover:bg-pink-100">
               <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" className="size-5"><rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" /></svg>
               {t("Instagram")} <span aria-hidden="true">↗</span><span className="sr-only"> {t("(opens in a new tab)")}</span>
+            </a>
+            <a href={tiktokUrl} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center gap-2 rounded-full border border-[#111111] bg-[#111111] px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#1A1A1A]">
+              <svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" className="size-5"><path d="M16.7 2h-3.4v13.4a3 3 0 1 1-2.6-3V9a6.4 6.4 0 1 0 6 6.4V8.6a8.4 8.4 0 0 0 5 1.6V6.8a5 5 0 0 1-5-4.8Z" /></svg>
+              {t("TikTok")} <span aria-hidden="true">↗</span><span className="sr-only"> {t("(opens in a new tab)")}</span>
             </a>
           </div>
         </div>

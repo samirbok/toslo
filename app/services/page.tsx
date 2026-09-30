@@ -1,6 +1,6 @@
 import { getLocale } from "../i18n/server";
 import { translator } from "../i18n/translations";
-import LanguagePicker, { LanguageWelcome } from "../language-picker";
+import { LanguageWelcome } from "../language-picker";
 import Link from "next/link";
 import MobileNavigation from "../mobile-navigation";
 import { createWhatsAppUrl } from "../contact-links";
@@ -124,7 +124,6 @@ export default async function ServicesPage() {
         </section>
 
       </main>
-      <div className="bg-white py-6"><LanguagePicker locale={locale} destination="/services" /></div>
       <footer className="border-t border-stone-200 bg-white py-8">
         <div className={`${container} flex flex-wrap items-center justify-between gap-4 text-sm text-stone-500`}>
           <p>{t("© Toslo Delivery")}</p>
