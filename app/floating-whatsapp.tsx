@@ -1,9 +1,13 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { deliveryWhatsAppUrl } from "./contact-links";
+import { translator, type Locale } from "./i18n/translations";
 
-export default function FloatingWhatsApp() {
+
+import { useEffect, useState } from "react";
+import { createWhatsAppUrl } from "./contact-links";
+
+export default function FloatingWhatsApp({ locale = "en" }: { locale?: Locale }) {
+  const t = translator(locale);
   const [contactVisible, setContactVisible] = useState(false);
 
   useEffect(() => {
@@ -22,9 +26,9 @@ export default function FloatingWhatsApp() {
 
   return (
     <a
-      href={deliveryWhatsAppUrl}
-      aria-label="Chat with Toslo on WhatsApp"
-      title="Chat on WhatsApp"
+      href={createWhatsAppUrl("I'd like to request a delivery.", locale)}
+      aria-label={t("Chat with Toslo on WhatsApp")}
+      title={t("Chat on WhatsApp")}
       className="fixed right-4 bottom-4 z-40 flex size-12 items-center justify-center rounded-full bg-[#00875A] text-white shadow-lg shadow-black/15 transition-colors hover:bg-[#007D53] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#00875A] sm:right-6 sm:bottom-6 sm:size-14"
     >
       <svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" className="size-7">

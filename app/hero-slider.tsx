@@ -1,5 +1,8 @@
 "use client";
 
+import { translator, type Locale } from "./i18n/translations";
+
+
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
@@ -9,7 +12,8 @@ const slides = [
   { src: "/images/img2.png", alt: "Delivery rider holding takeaway bags outside Crusty" },
 ];
 
-export default function HeroSlider() {
+export default function HeroSlider({ locale = "en" }: { locale?: Locale }) {
+  const t = translator(locale);
   const [active, setActive] = useState(0);
   const [paused, setPaused] = useState(false);
 
@@ -23,9 +27,10 @@ export default function HeroSlider() {
 
   return (
     <div
+      dir="ltr"
       role="region"
-      aria-roledescription="carousel"
-      aria-label="Local food and delivery"
+      aria-roledescription={t("carousel")}
+      aria-label={t("Local food and delivery")}
       className="relative mx-auto w-full max-w-lg overflow-hidden rounded-[2rem] bg-[#1A1A1A] shadow-xl shadow-black/10 [&_button:focus-visible]:outline-2 [&_button:focus-visible]:outline-offset-4 [&_button:focus-visible]:outline-white"
       onKeyDown={(event) => {
         if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
@@ -43,14 +48,14 @@ export default function HeroSlider() {
           <div
             key={slide.src}
             role="group"
-            aria-roledescription="slide"
-            aria-label={`${index + 1} of ${slides.length}`}
+            aria-roledescription={t("slide")}
+            aria-label={`${index + 1} ${t("of")} ${slides.length}`}
             aria-hidden={active !== index}
             className="relative aspect-[1197/1314] w-full shrink-0"
           >
             <Image
               src={slide.src}
-              alt={slide.alt}
+              alt={t(slide.alt)}
               fill
               sizes="(max-width: 560px) calc(100vw - 48px), (max-width: 1023px) 512px, (max-width: 1199px) calc((100vw - 112px) / 2), 512px"
               preload={index === 0}
@@ -63,18 +68,18 @@ export default function HeroSlider() {
       <div className="absolute inset-x-0 bottom-0 flex items-center justify-between bg-gradient-to-t from-black/70 to-transparent px-5 pt-12 pb-4 text-white">
         <button
           type="button"
-          aria-label={paused ? "Resume slideshow" : "Pause slideshow"}
+          aria-label={t(paused ? "Resume slideshow" : "Pause slideshow")}
           onClick={() => setPaused((current) => !current)}
           className="flex size-11 items-center justify-center rounded-full bg-black/40 hover:bg-black/60"
         >
           <span aria-hidden="true">{paused ? "▶" : "Ⅱ"}</span>
         </button>
-        <div className="flex items-center gap-1" aria-label="Choose a picture">
+        <div className="flex items-center gap-1" aria-label={t("Choose a picture")}>
           {slides.map((slide, index) => (
             <button
               key={slide.src}
               type="button"
-              aria-label={`Show picture ${index + 1}`}
+              aria-label={`${t("Show picture")} ${index + 1}`}
               aria-current={active === index ? "true" : undefined}
               onClick={() => setActive(index)}
               className="flex size-11 items-center justify-center rounded-full"
@@ -85,7 +90,7 @@ export default function HeroSlider() {
         </div>
         <button
           type="button"
-          aria-label="Next picture"
+          aria-label={t("Next picture")}
           onClick={() => setActive((current) => (current + 1) % slides.length)}
           className="flex size-11 items-center justify-center rounded-full bg-black/40 text-xl hover:bg-black/60"
         >

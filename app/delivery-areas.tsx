@@ -1,8 +1,10 @@
 "use client";
 
+import { translator, type Locale } from "./i18n/translations";
 import { useEffect, useRef } from "react";
 
-export default function DeliveryAreas({ zones }: { zones: string[] }) {
+export default function DeliveryAreas({ zones, locale = "en" }: { zones: string[]; locale?: Locale }) {
+  const t = translator(locale);
   const listRef = useRef<HTMLUListElement>(null);
 
   useEffect(() => {
@@ -41,7 +43,7 @@ export default function DeliveryAreas({ zones }: { zones: string[] }) {
 
   return (
     <div id="delivery-areas" tabIndex={-1} className="scroll-mt-28 rounded-2xl focus-visible:outline-2 focus-visible:outline-offset-8 focus-visible:outline-[#00875A]">
-      <ul ref={listRef} aria-label="Delivery areas" className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+      <ul ref={listRef} aria-label={t("Delivery areas")} className="grid grid-cols-2 gap-3 sm:grid-cols-3">
         {zones.map(zone => (
           <li key={zone}>
             <div className={`group flex h-full min-h-18 items-center gap-3 rounded-xl border px-4 py-4 shadow-sm shadow-black/[0.025] transition-[transform,box-shadow,border-color,background-color] duration-300 hover:border-[#00875A]/30 hover:bg-[#ECFDF5] hover:shadow-md hover:shadow-black/5 motion-safe:hover:-translate-y-1 motion-reduce:transition-none ${zone === "Agadir" ? "border-[#00875A]/20 bg-[#ECFDF5]" : "border-gray-200/80 bg-white"}`}>
@@ -49,7 +51,7 @@ export default function DeliveryAreas({ zones }: { zones: string[] }) {
                 <path d="M19 10c0 5-7 11-7 11S5 15 5 10a7 7 0 1 1 14 0Z" />
                 <circle cx="12" cy="10" r="2.5" />
               </svg>
-              <span className="text-sm font-semibold text-[#1A1A1A]">{zone}</span>
+              <span className="text-sm font-semibold text-[#1A1A1A]">{t(zone)}</span>
             </div>
           </li>
         ))}

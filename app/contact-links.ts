@@ -1,5 +1,8 @@
-export function createWhatsAppUrl(request: string) {
-  const message = `Hi Toslo! I came from your website. ${request}`;
+import { translator, type Locale } from "./i18n/translations";
+
+export function createWhatsAppUrl(request: string, locale: Locale = "en") {
+  const t = translator(locale);
+  const message = `${t("Hi Toslo! I came from your website.")} ${t(request)}`;
   return `https://wa.me/212664967161?text=${encodeURIComponent(message)}`;
 }
 

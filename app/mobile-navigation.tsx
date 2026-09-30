@@ -1,8 +1,11 @@
 "use client";
 
+import { translator, type Locale } from "./i18n/translations";
+import LanguagePicker from "./language-picker";
 import { useRef } from "react";
 
-export default function MobileNavigation({ home = false }: { home?: boolean }) {
+export default function MobileNavigation({ home = false, locale = "en" }: { home?: boolean; locale?: Locale }) {
+  const t = translator(locale);
   const menuRef = useRef<HTMLDetailsElement>(null);
   const links = [
     ["Services", "/services"],
@@ -23,13 +26,14 @@ export default function MobileNavigation({ home = false }: { home?: boolean }) {
         if (!event.currentTarget.contains(event.relatedTarget) && menuRef.current) menuRef.current.open = false;
       }}
     >
-      <summary aria-label="Navigation menu" className="flex size-11 cursor-pointer list-none items-center justify-center rounded-lg hover:bg-gray-100 focus-visible:outline-2 focus-visible:outline-[#00875A] [&::-webkit-details-marker]:hidden">
+      <summary aria-label={t("Navigation menu")} className="flex size-11 cursor-pointer list-none items-center justify-center rounded-lg hover:bg-gray-100 focus-visible:outline-2 focus-visible:outline-[#00875A] [&::-webkit-details-marker]:hidden">
         <span aria-hidden="true" className="flex flex-col gap-1.5"><span className="h-0.5 w-5 bg-current" /><span className="h-0.5 w-5 bg-current" /><span className="h-0.5 w-5 bg-current" /></span>
       </summary>
       <div className="absolute inset-x-0 top-full max-h-[calc(100dvh-81px)] overflow-y-auto border-b border-gray-200 bg-[#FAFAF8] px-6 py-3 shadow-lg shadow-black/5">
         {links.map(([label, href]) => (
-          <a key={label} href={href} onClick={() => { if (menuRef.current) menuRef.current.open = false; }} className="flex min-h-12 items-center rounded-lg px-3 text-sm font-medium text-[#111111] hover:bg-[#ECFDF5] focus-visible:outline-2 focus-visible:outline-[#00875A]">{label}</a>
+          <a key={label} href={href} onClick={() => { if (menuRef.current) menuRef.current.open = false; }} className="flex min-h-12 items-center rounded-lg px-3 text-sm font-medium text-[#111111] hover:bg-[#ECFDF5] focus-visible:outline-2 focus-visible:outline-[#00875A]">{t(label)}</a>
         ))}
+        <div className="border-t border-gray-200 py-4"><LanguagePicker locale={locale} destination={home ? "/" : "/services"} /></div>
       </div>
     </details>
   );
