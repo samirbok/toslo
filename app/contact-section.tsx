@@ -1,7 +1,7 @@
-import { deliveryWhatsAppUrl, deliveryPhone, deliveryPhoneUrl, instagramUrl } from "./contact-links";
+import { contactWhatsAppUrl, deliveryPhone, deliveryPhoneUrl, instagramUrl } from "./contact-links";
 
 const contactDetails = [
-  { title: "WhatsApp", value: deliveryPhone, note: "Questions & delivery requests", href: deliveryWhatsAppUrl, tone: "bg-[#ECFDF5] text-[#007D53]", path: "M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.4 8.4 0 0 1 3.8-.9h.5a8.5 8.5 0 0 1 8 8v.5Z" },
+  { title: "WhatsApp", value: deliveryPhone, note: "Questions & delivery requests", href: contactWhatsAppUrl, tone: "bg-[#ECFDF5] text-[#007D53]", path: "M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.4 8.4 0 0 1 3.8-.9h.5a8.5 8.5 0 0 1 8 8v.5Z" },
   { title: "Telephone", value: deliveryPhone, note: "Available 24/7", href: deliveryPhoneUrl, tone: "bg-[#ECFDF5] text-[#007D53]", path: "M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.9a2 2 0 0 1-.5 2.1L8 10a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.5c.9.3 1.9.6 2.9.7a2 2 0 0 1 1.7 2Z" },
   { title: "Address", value: "Agadir, Morocco", note: "View our Google Maps listing", href: "https://maps.app.goo.gl/X78CjoVafbTbxb4R6", tone: "bg-[#FFF5E4] text-[#94621B]", path: "M19 10c0 5-7 11-7 11S5 15 5 10a7 7 0 1 1 14 0Z M14.5 10a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0Z" },
   { title: "Opening hours", value: "24/7 · Every day", note: "Open every day", href: undefined, tone: "bg-[#F1EDFA] text-[#6B4D91]", path: "M22 12a10 10 0 1 1-20 0 10 10 0 0 1 20 0Z M12 6v6l4 2" },

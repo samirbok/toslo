@@ -1,6 +1,6 @@
 import Link from "next/link";
 import MobileNavigation from "./mobile-navigation";
-import { deliveryWhatsAppUrl, deliveryPhoneUrl } from "./contact-links";
+import { createWhatsAppUrl, businessWhatsAppUrl, deliveryWhatsAppUrl, deliveryPhoneUrl } from "./contact-links";
 import Script from "next/script";
 import HeroSlider from "./hero-slider";
 import ContactSection from "./contact-section";
@@ -115,7 +115,7 @@ export default function Home() {
             <p className={eyebrow}>Delivery zones</p>
             <h2 id="zones-heading" className={heading}>Across Agadir.<br />Closer to you.</h2>
             <p className="mt-5 leading-7 text-gray-600 max-sm:text-pretty">From your neighborhood to nearby towns, Toslo makes local delivery simple.</p>
-            <a href={deliveryWhatsAppUrl} className={`${primary} mt-7 max-sm:max-w-full`}><span className="sm:hidden">Check delivery availability</span><span className="hidden sm:inline">Confirm delivery on WhatsApp</span><span aria-hidden="true">↗</span></a>
+            <a href={createWhatsAppUrl("Can you confirm delivery availability between my pickup and destination?")} className={`${primary} mt-7 max-sm:max-w-full`}><span className="sm:hidden">Check delivery availability</span><span className="hidden sm:inline">Confirm delivery on WhatsApp</span><span aria-hidden="true">↗</span></a>
             <p className="mt-3 text-sm leading-6 text-gray-500">Send your pickup and destination to check availability.</p>
           </div>
           <DeliveryAreas zones={zones} />
@@ -138,18 +138,18 @@ export default function Home() {
                   <ul className="my-6 space-y-3">
                     {features.map(feature => <li key={feature} className="flex gap-2 text-sm leading-5 text-gray-600"><span aria-hidden="true" className="text-[#00875A]">✓</span>{feature}</li>)}
                   </ul>
-                  <a href={deliveryWhatsAppUrl} aria-label={`Order ${title.toLowerCase()} on WhatsApp`} className={`${popular ? whatsapp : primary} mt-auto w-full`}>Order delivery <span aria-hidden="true">↗</span></a>
+                  <a href={createWhatsAppUrl(`I’m interested in ${title.toLowerCase()}. I’d like to order.`)} aria-label={`Order ${title.toLowerCase()} on WhatsApp`} className={`${popular ? whatsapp : primary} mt-auto w-full`}>Order delivery <span aria-hidden="true">↗</span></a>
                 </article>
               ))}
             </div>
             <div className="mt-7 grid gap-4 sm:grid-cols-2">
               <div className="flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-gray-200 bg-white p-5">
                 <div><h3 className="text-sm font-semibold text-[#111111]">By distance</h3><p className="mt-2 text-sm text-gray-600">From <span className="font-semibold text-[#007D53]">25 MAD</span> · +5 MAD per additional km</p></div>
-                <a href={deliveryWhatsAppUrl} className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-[#007D53]">Get a quote <span aria-hidden="true">↗</span></a>
+                <a href={createWhatsAppUrl("I’d like a distance-based delivery quote.")} className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-[#007D53]">Get a quote <span aria-hidden="true">↗</span></a>
               </div>
               <div className="flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-gray-200 bg-white p-5">
                 <div><h3 className="text-sm font-semibold text-[#111111]">Business delivery</h3><p className="mt-2 text-sm text-gray-600">A tailored service, priced on request.</p></div>
-                <a href={deliveryWhatsAppUrl} className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-[#007D53]">Let’s talk <span aria-hidden="true">↗</span></a>
+                <a href={businessWhatsAppUrl} className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-[#007D53]">Let’s talk <span aria-hidden="true">↗</span></a>
               </div>
             </div>
           </div>
@@ -161,7 +161,7 @@ export default function Home() {
               <p className={eyebrow}>For local businesses</p>
               <h2 id="business-heading" className={heading}>You run your business.<br />We deliver<span className="text-[#00875A]">.</span></h2>
               <p className="mt-5 max-w-md leading-7 text-gray-600 max-sm:mx-auto max-sm:text-pretty">Keep your focus on your customers. Toslo handles local pickups and deliveries across Agadir.</p>
-              <a href={deliveryWhatsAppUrl} className={`${primary} mt-7`}>Let’s talk delivery <span aria-hidden="true">↗</span></a>
+              <a href={businessWhatsAppUrl} className={`${primary} mt-7`}>Let’s talk delivery <span aria-hidden="true">↗</span></a>
               <p className="mt-3 text-xs leading-5 text-gray-500">Tell us about your business on WhatsApp.</p>
             </div>
             <div className="overflow-hidden rounded-3xl border border-gray-200/80 bg-white px-6 shadow-sm shadow-black/[0.025] max-sm:px-4 sm:px-8">

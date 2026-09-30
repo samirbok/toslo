@@ -1,6 +1,6 @@
 import Link from "next/link";
 import MobileNavigation from "../mobile-navigation";
-import { deliveryWhatsAppUrl } from "../contact-links";
+import { createWhatsAppUrl, deliveryWhatsAppUrl } from "../contact-links";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -92,7 +92,7 @@ export default function ServicesPage() {
                       <span className="w-fit rounded-full bg-emerald-50 px-2.5 py-1 text-xs font-medium text-emerald-800">{listing.category}</span>
                       <h4 className="mt-4 text-lg font-semibold tracking-tight text-stone-900">{listing.name}</h4>
                       <p className="mt-2 flex-1 text-sm leading-6 text-stone-500">{listing.description}</p>
-                      <a href={deliveryWhatsAppUrl} aria-label={`Request delivery — ${listing.name} (demo listing)`} className={`${primary} mt-6 w-full px-3`}>Request delivery <span aria-hidden="true">↗</span></a>
+                      <a href={createWhatsAppUrl(`I saw the demo listing for ${listing.name} on your services page. Can you confirm whether pickup is available?`)} aria-label={`Request delivery — ${listing.name} (demo listing)`} className={`${primary} mt-6 w-full px-3`}>Request delivery <span aria-hidden="true">↗</span></a>
                     </div>
                   </article>
                 ))}
@@ -108,7 +108,7 @@ export default function ServicesPage() {
                     <span aria-hidden="true" className="flex size-11 items-center justify-center rounded-xl bg-emerald-50 text-2xl text-emerald-700">{service.icon}</span>
                     <h4 className="mt-4 font-semibold text-stone-900">{service.title}</h4>
                     <p className="mt-2 flex-1 text-sm leading-6 text-stone-600">{service.description}</p>
-                    <a href={deliveryWhatsAppUrl} aria-label={`Request delivery — ${service.title}`} className="mt-4 inline-flex min-h-12 items-center gap-2 text-sm font-semibold text-emerald-700 hover:text-emerald-900">Request delivery <span aria-hidden="true">↗</span></a>
+                    <a href={createWhatsAppUrl(`I’m interested in ${service.title.toLowerCase()} from your services page.`)} aria-label={`Request delivery — ${service.title}`} className="mt-4 inline-flex min-h-12 items-center gap-2 text-sm font-semibold text-emerald-700 hover:text-emerald-900">Request delivery <span aria-hidden="true">↗</span></a>
                   </article>
                 ))}
               </div>
