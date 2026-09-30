@@ -1,3 +1,4 @@
+import BrandLogo from "./brand-logo";
 import { getLocale } from "./i18n/server";
 import { translator } from "./i18n/translations";
 import { LanguageWelcome } from "./language-picker";
@@ -59,7 +60,7 @@ export default async function Home() {
         <nav aria-label={t("Main navigation")} className={`${container} flex h-20 items-center justify-between gap-2 sm:gap-4`}>
           <div className="flex items-center gap-2 sm:gap-3">
             <MobileNavigation home locale={locale} />
-            <Link href="/" dir="ltr" className="text-3xl font-extrabold tracking-tight text-[#00875A]">Toslo<span className="text-[#00875A]">.</span></Link>
+            <Link href="/" dir="ltr" className="inline-flex shrink-0 items-center"><BrandLogo /></Link>
           </div>
           <div className="hidden items-center gap-6 text-sm font-medium text-gray-600 lg:flex">
             {[["Services", "services"], ["How it works", "how-it-works"], ["Pricing", "pricing"], ["Zones", "zones"], ["Reviews", "reviews"], ["Contact", "contact"]].map(([label, id]) => (
@@ -224,7 +225,7 @@ export default async function Home() {
       </main>
 
       <footer className="bg-[#FAFAF8] pt-16 pb-28 max-sm:pt-10 max-sm:pb-20">
-        <div className={container}><div className="grid gap-10 max-sm:grid-cols-2 max-sm:gap-x-5 max-sm:gap-y-6 sm:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr_1fr]"><div className="max-sm:col-span-2 max-sm:text-center"><Link href="/" className="text-2xl font-bold tracking-tight text-[#00875A]">{t("Toslo Delivery")}</Link><p className="mt-4 max-w-xs text-sm leading-7 text-gray-600 max-sm:mx-auto max-sm:mt-2">{t("Local delivery made simple in Agadir.")}</p></div>
+        <div className={container}><div className="grid gap-10 max-sm:grid-cols-2 max-sm:gap-x-5 max-sm:gap-y-6 sm:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr_1fr]"><div className="max-sm:col-span-2 max-sm:text-center"><Link href="/" className="inline-flex"><BrandLogo className="size-24" /></Link><p className="mt-4 max-w-xs text-sm leading-7 text-gray-600 max-sm:mx-auto max-sm:mt-2">{t("Local delivery made simple in Agadir.")}</p></div>
           {[{ title: "Company", links: [["Contact", "#contact"], ["Reviews", "#reviews"]] }, { title: "Services", links: [["Food delivery", "/services"], ["Parcels", "/services"], ["Documents", "/services"], ["Business delivery", "#business"]] }, { title: "Useful links", links: [["Delivery zones", "#zones"], ["Pricing", "#pricing"], ["Become a driver", "#"]] }].map(column => <div key={column.title} className={column.title === "Services" ? "max-sm:col-start-2 max-sm:row-start-2 max-sm:row-span-2" : column.title === "Company" ? "max-sm:col-start-1 max-sm:row-start-2" : "max-sm:col-start-1 max-sm:row-start-3"}><h3 className="text-sm font-semibold">{t(column.title)}</h3><ul className="mt-4 space-y-1 max-sm:mt-2 max-sm:space-y-0">{column.links.map(([label, href]) => <li key={label}><Link href={href} className="inline-flex min-h-11 items-center text-sm text-gray-600 hover:text-[#007D53]">{t(label)}</Link></li>)}</ul></div>)}
         </div><div className="mt-12 border-t border-gray-200 pt-6 text-xs text-gray-600 max-sm:mt-8 max-sm:text-center">{t("© Toslo Delivery")}</div></div>
       </footer>

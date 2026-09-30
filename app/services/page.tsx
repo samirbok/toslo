@@ -1,3 +1,4 @@
+import BrandLogo from "../brand-logo";
 import { getLocale } from "../i18n/server";
 import { translator } from "../i18n/translations";
 import { LanguageWelcome } from "../language-picker";
@@ -44,7 +45,7 @@ export default async function ServicesPage() {
         <nav aria-label={t("Main navigation")} className={`${container} flex h-20 items-center justify-between gap-2 sm:gap-4`}>
           <div className="flex items-center gap-2 sm:gap-3">
             <MobileNavigation locale={locale} />
-            <Link href="/" dir="ltr" className="text-3xl font-extrabold tracking-tight text-emerald-800">Toslo<span className="text-emerald-500">.</span></Link>
+            <Link href="/" dir="ltr" className="inline-flex shrink-0 items-center"><BrandLogo /></Link>
           </div>
           <div className="hidden items-center gap-6 text-sm font-medium text-stone-600 lg:flex">
             {[["Services", "services"], ["How it works", "how-it-works"], ["Pricing", "pricing"], ["Zones", "zones"], ["Reviews", "reviews"], ["Contact", "contact"]].map(([label, id]) => (

@@ -1,6 +1,7 @@
 "use client";
 
-import { useOptimistic } from "react";
+import BrandLogo from "./brand-logo";
+import { useEffect, useOptimistic, useRef } from "react";
 import { chooseLanguage } from "./i18n/actions";
 import { languageNames, translator, type Locale } from "./i18n/translations";
 
@@ -31,10 +32,35 @@ export default function LanguagePicker({ locale, destination = "/" }: { locale?:
 }
 
 export function LanguageWelcome({ destination = "/" }: { destination?: string }) {
+  const logoRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const logo = logoRef.current;
+    if (!logo) return;
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    if (reducedMotion.matches) return;
+
+    const animation = logo.animate([
+      { opacity: 0, transform: "translateY(12px) scale(0.96)", offset: 0 },
+      { opacity: 1, transform: "translateY(0) scale(1)", offset: 0.2 },
+      { opacity: 1, transform: "translateY(-6px) scale(1)", offset: 0.45 },
+      { opacity: 1, transform: "translateY(0) scale(1)", offset: 0.7 },
+      { opacity: 1, transform: "translateY(-3px) scale(1)", offset: 0.85 },
+      { opacity: 1, transform: "translateY(0) scale(1)", offset: 1 },
+    ], { duration: 4500, easing: "ease-in-out", iterations: 1 });
+
+    const stopMotion = () => { if (reducedMotion.matches) animation.cancel(); };
+    reducedMotion.addEventListener("change", stopMotion);
+    return () => {
+      animation.cancel();
+      reducedMotion.removeEventListener("change", stopMotion);
+    };
+  }, []);
+
   return (
     <main className="flex min-h-dvh items-center justify-center bg-[#FAFAF8] px-6 pt-8 pb-24 sm:pb-32" dir="ltr">
       <section aria-labelledby="language-heading" className="w-full max-w-lg rounded-3xl border border-gray-200 bg-white px-6 py-8 text-center shadow-sm sm:p-10">
-        <p className="text-4xl font-extrabold tracking-tight text-[#00875A]">Toslo.</p>
+        <div ref={logoRef}><BrandLogo className="mx-auto size-32 sm:size-36" /></div>
         <h1 id="language-heading" className="mt-8 text-2xl font-bold text-[#111111]">Choose your preferred language</h1>
         <p lang="fr" className="mt-3 text-gray-600">Choisissez votre langue</p>
         <p lang="ar" dir="rtl" className="mt-3 text-xl leading-8 text-gray-600">اختر لغتك</p>
