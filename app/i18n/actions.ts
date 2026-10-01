@@ -1,6 +1,6 @@
 "use server";
 
-import { cookies } from "next/headers";
+import { cookies, headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { isLocale } from "./translations";
 
@@ -16,5 +16,16 @@ export async function chooseLanguage(formData: FormData) {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
   });
-  redirect(formData.get("destination") === "/services" ? "/services" : "/");
+  const destination = formData.get("destination") === "/services" ? "/services" : "/";
+  // Support submitting the language form before JavaScript loads, too.
+  if (!(await headers()).has("next-action")) {
+    cookieStore.set("toslo-language-redirect", destination, {
+      maxAge: 60,
+      path: "/",
+      sameSite: "lax",
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+    });
+  }
+  redirect(destination);
 }
