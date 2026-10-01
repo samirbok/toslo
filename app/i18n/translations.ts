@@ -122,6 +122,8 @@ const translations: Record<string, [string, string]> = {
 "I’m interested in {service} from your services page.": ["Je suis intéressé(e) par {service} sur votre page de services.", "أنا مهتم بخدمة {service} من صفحة خدماتكم."],
 "Order {service} on WhatsApp": ["Commander {service} sur WhatsApp", "اطلب {service} عبر واتساب"],
 "Request delivery — {service}": ["Demander une livraison — {service}", "اطلب التوصيل — {service}"],
+"Toslo is your local delivery service in Agadir, Taghazout and Tamraght for parcels, food, documents, shopping, local orders and errands.": ["Toslo livre vos colis, repas, documents, courses et commandes locales à Agadir, Taghazout et Tamraght, et facilite vos petites courses du quotidien.", "توسلو خدمة التوصيل المحلية في أكادير وتغازوت وتمراغت للطرود والوجبات والوثائق والمشتريات والطلبات والمشاوير اليومية."],
+"Order your delivery on WhatsApp in just a few steps and let a local Toslo driver take care of the rest.": ["Commandez votre livraison sur WhatsApp en quelques étapes et laissez un livreur Toslo s’occuper du reste.", "اطلب التوصيل عبر واتساب بخطوات بسيطة ودع أحد مندوبي توسلو يتكفل بالباقي."],
 };
 export function translator(locale: Locale) {
   return (text: string) => locale === "en" ? text : translations[text]?.[locale === "fr" ? 0 : 1] ?? text;
