@@ -88,14 +88,6 @@ export default function HeroSlider({ locale = "en" }: { locale?: Locale }) {
             </button>
           ))}
         </div>
-        <button
-          type="button"
-          aria-label={t("Next picture")}
-          onClick={() => setActive((current) => (current + 1) % slides.length)}
-          className="flex size-11 items-center justify-center rounded-full bg-black/40 text-xl hover:bg-black/60"
-        >
-          <span aria-hidden="true">→</span>
-        </button>
       </div>
     </div>
   );

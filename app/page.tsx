@@ -16,6 +16,7 @@ const sectionFrame = "min-h-[calc(100dvh-81px)] scroll-mt-[81px] py-10 lg:py-12"
 const action = "inline-flex min-h-12 items-center justify-center gap-2 rounded-xl px-6 py-3 text-sm font-semibold text-white shadow-sm transition-colors";
 const primary = `${action} bg-[#111111] hover:bg-[#00875A]`;
 const whatsapp = `${action} bg-[#00875A] hover:bg-[#007D53]`;
+const callUs = `${action} bg-[#E5A83B] hover:bg-[#CF922A]`;
 const secondary = "inline-flex min-h-12 items-center justify-center rounded-xl border border-gray-300 bg-white px-6 py-3 text-sm font-semibold text-[#1A1A1A] transition-colors hover:bg-[#FAFAF8]";
 const eyebrow = "text-xs font-bold uppercase tracking-[0.18em] text-[#007D53]";
 const heading = "mt-4 text-3xl font-bold tracking-tight text-[#111111] sm:text-4xl";
@@ -68,7 +69,7 @@ export default async function Home() {
             ))}
           </div>
           <div className="flex shrink-0 items-center gap-1 sm:gap-3">
-            <a href={deliveryWhatsAppUrl} className={primary.replace("px-6", "px-3 sm:px-6")}>{t("Order now")} <span aria-hidden="true">↗</span></a>
+            <a href={deliveryWhatsAppUrl} className={primary.replace("px-6", "px-3 sm:px-6")}>{t("Order now")}</a>
           </div>
         </nav>
       </header>
@@ -77,18 +78,18 @@ export default async function Home() {
         <section aria-labelledby="hero-heading" className={`${sectionFrame} relative isolate flex items-center overflow-hidden bg-[#FAFAF8]`}>
           <div aria-hidden="true" className="absolute -top-36 -right-32 -z-10 size-[520px] rounded-full border-[60px] border-[#00875A]/5" />
           <div className={`${container} grid items-center gap-6 lg:grid-cols-2 lg:gap-16`}>
-            <h1 id="hero-heading" className="order-first mx-auto w-full text-center text-[2.5rem] leading-[1.08] font-bold tracking-tight sm:text-6xl lg:col-span-2 lg:text-6xl"><span className="text-[#00875A]">{t("Your delivery,")}</span><br className="lg:hidden" />{" "}<span className="text-[#F7DE3A]">{t("made simple.")}</span></h1>
+            <h1 id="hero-heading" className="order-first mx-auto w-full text-center text-[2.5rem] leading-[1.08] font-bold tracking-tight sm:text-6xl lg:col-span-2 lg:text-6xl"><span className="text-[#00875A]">{t("Your delivery,")}</span><br className="lg:hidden" />{" "}<span className="text-[#E5A83B]">{t("made simple.")}</span></h1>
             <div className="mx-auto w-full max-w-lg pt-2 text-center lg:mx-0 lg:pt-0 lg:text-start">
               <p className="text-base leading-7 text-gray-700 sm:text-lg sm:leading-8">{t("Toslo makes it easy to send parcels, food, documents, shopping and local orders across Agadir.")}</p>
               <p className="mt-4 text-sm leading-6 text-gray-600 sm:text-base sm:leading-7">{t("Request your delivery in just a few steps and let a local Toslo driver take care of the rest.")}</p>
-              <div className="mt-8 hidden gap-3 lg:flex"><a href={deliveryWhatsAppUrl} className={whatsapp}>{t("Order on WhatsApp")} <span aria-hidden="true">↗</span></a><a href={deliveryPhoneUrl} className={secondary}>{t("Call us")}</a></div>
-              <Link href="/services" className="mt-5 inline-flex min-h-11 items-center gap-3 text-sm font-semibold text-gray-600 hover:text-[#007D53]">{t("Our services")} <span aria-hidden="true">↗</span></Link>
+              <div className="mt-8 hidden gap-3 lg:flex"><a href={deliveryWhatsAppUrl} className={whatsapp}>{t("Order on WhatsApp")}</a><a href={deliveryPhoneUrl} className={callUs}>{t("Call us")}</a></div>
+              <Link href="/services" className="mt-5 inline-flex min-h-11 items-center gap-3 text-sm font-semibold text-gray-600 hover:text-[#007D53]">{t("Our services")}</Link>
             </div>
             <div className="-order-1 min-w-0 lg:order-last">
               <HeroSlider locale={locale} />
               <div className="mx-auto mt-5 flex w-full max-w-lg flex-col gap-3 lg:hidden">
-                <a href={deliveryWhatsAppUrl} className={whatsapp}>{t("Order on WhatsApp")} <span aria-hidden="true">↗</span></a>
-                <a href={deliveryPhoneUrl} className={secondary}>{t("Call us")}</a>
+                <a href={deliveryWhatsAppUrl} className={whatsapp}>{t("Order on WhatsApp")}</a>
+                <a href={deliveryPhoneUrl} className={callUs}>{t("Call us")}</a>
               </div>
             </div>
           </div>
@@ -124,7 +125,7 @@ export default async function Home() {
             <p className={eyebrow}>{t("Delivery zones")}</p>
             <h2 id="zones-heading" className={heading}>{t("Across Agadir.")}<br />{t("Closer to you.")}</h2>
             <p className="mt-5 leading-7 text-gray-600 max-sm:text-pretty">{t("From your neighborhood to nearby towns, Toslo makes local delivery simple.")}</p>
-            <a href={createWhatsAppUrl("Can you confirm delivery availability between my pickup and destination?", locale)} className={`${primary} mt-7 max-sm:max-w-full`}><span className="sm:hidden">{t("Check delivery availability")}</span><span className="hidden sm:inline">{t("Confirm delivery on WhatsApp")}</span><span aria-hidden="true">↗</span></a>
+            <a href={createWhatsAppUrl("Can you confirm delivery availability between my pickup and destination?", locale)} className={`${primary} mt-7 max-sm:max-w-full`}><span className="sm:hidden">{t("Check delivery availability")}</span><span className="hidden sm:inline">{t("Confirm delivery on WhatsApp")}</span></a>
             <p className="mt-3 text-sm leading-6 text-gray-500">{t("Send your pickup and destination to check availability.")}</p>
           </div>
           <DeliveryAreas zones={zones} locale={locale} />
@@ -147,18 +148,18 @@ export default async function Home() {
                   <ul className="my-6 space-y-3">
                     {features.map(feature => <li key={feature} className="flex gap-2 text-sm leading-5 text-gray-600"><span aria-hidden="true" className="text-[#00875A]">✓</span>{t(feature)}</li>)}
                   </ul>
-                  <a href={createWhatsAppUrl(t("I’m interested in {service}. I’d like to order.").replace("{service}", t(title)), locale)} aria-label={t("Order {service} on WhatsApp").replace("{service}", t(title))} className={`${popular ? whatsapp : primary} mt-auto w-full`}>{t("Order delivery")} <span aria-hidden="true">↗</span></a>
+                  <a href={createWhatsAppUrl(t("I’m interested in {service}. I’d like to order.").replace("{service}", t(title)), locale)} aria-label={t("Order {service} on WhatsApp").replace("{service}", t(title))} className={`${popular ? whatsapp : primary} mt-auto w-full`}>{t("Order delivery")}</a>
                 </article>
               ))}
             </div>
             <div className="mt-7 grid gap-4 sm:grid-cols-2">
               <div className="flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-gray-200 bg-white p-5">
                 <div><h3 className="text-sm font-semibold text-[#111111]">{t("By distance")}</h3><p className="mt-2 text-sm text-gray-600">{t("From")} <span className="font-semibold text-[#007D53]">{t("25 MAD")}</span> {t("· +5 MAD per additional km")}</p></div>
-                <a href={createWhatsAppUrl("I’d like a distance-based delivery quote.", locale)} className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-[#007D53]">{t("Get a quote")} <span aria-hidden="true">↗</span></a>
+                <a href={createWhatsAppUrl("I’d like a distance-based delivery quote.", locale)} className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-[#007D53]">{t("Get a quote")}</a>
               </div>
               <div className="flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-gray-200 bg-white p-5">
                 <div><h3 className="text-sm font-semibold text-[#111111]">{t("Business delivery")}</h3><p className="mt-2 text-sm text-gray-600">{t("A tailored service, priced on request.")}</p></div>
-                <a href={businessWhatsAppUrl} className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-[#007D53]">{t("Let’s talk")} <span aria-hidden="true">↗</span></a>
+                <a href={businessWhatsAppUrl} className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-[#007D53]">{t("Let’s talk")}</a>
               </div>
             </div>
           </div>
@@ -170,7 +171,7 @@ export default async function Home() {
               <p className={eyebrow}>{t("For local businesses")}</p>
               <h2 id="business-heading" className={heading}>{t("You run your business.")}<br />{t("We deliver")}<span className="text-[#00875A]">.</span></h2>
               <p className="mt-5 max-w-md leading-7 text-gray-600 max-sm:mx-auto max-sm:text-pretty">{t("Keep your focus on your customers. Toslo handles local pickups and deliveries across Agadir.")}</p>
-              <a href={businessWhatsAppUrl} className={`${primary} mt-7`}>{t("Let’s talk delivery")} <span aria-hidden="true">↗</span></a>
+              <a href={businessWhatsAppUrl} className={`${primary} mt-7`}>{t("Let’s talk delivery")}</a>
               <p className="mt-3 text-xs leading-5 text-gray-500">{t("Tell us about your business on WhatsApp.")}</p>
             </div>
             <div className="overflow-hidden rounded-3xl border border-gray-200/80 bg-white px-6 shadow-sm shadow-black/[0.025] max-sm:px-4 sm:px-8">
@@ -216,7 +217,7 @@ export default async function Home() {
         </section>
 
         <section id="faq" aria-labelledby="faq-heading" className={`${container} ${sectionFrame} grid content-center items-center gap-10 max-sm:gap-6 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20`}>
-          <div className="max-sm:text-center"><p className={eyebrow}>{t("FAQ")}</p><h2 id="faq-heading" className={heading}>{t("Frequently")}<br />{t("asked questions")}</h2><p className="mt-5 leading-7 text-gray-600">{t("A few things to know before your next delivery.")}</p><a href="#contact" className="mt-5 inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-[#007D53]">{t("Still have a question?")} <span aria-hidden="true">↗</span></a></div>
+          <div className="max-sm:text-center"><p className={eyebrow}>{t("FAQ")}</p><h2 id="faq-heading" className={heading}>{t("Frequently")}<br />{t("asked questions")}</h2><p className="mt-5 leading-7 text-gray-600">{t("A few things to know before your next delivery.")}</p><a href="#contact" className="mt-5 inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-[#007D53]">{t("Still have a question?")}</a></div>
           <div className="divide-y divide-gray-200 border-y border-gray-200">{faqs.map(([question, answer]) => <details key={question} className="group py-1"><summary className="flex min-h-16 cursor-pointer list-none items-center justify-between gap-5 py-4 text-sm font-semibold focus-visible:outline-2 focus-visible:outline-[#00875A] [&::-webkit-details-marker]:hidden">{t(question)}<span aria-hidden="true" className="text-xl font-normal text-[#007D53] group-open:rotate-45">+</span></summary><p className="pb-5 pe-7 text-sm leading-7 text-gray-600">{t(answer)}</p></details>)}</div>
         </section>
 

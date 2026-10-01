@@ -53,7 +53,7 @@ export default async function ServicesPage() {
             ))}
           </div>
           <div className="flex shrink-0 items-center gap-1 sm:gap-3">
-            <a href={deliveryWhatsAppUrl} className={primary.replace("px-6", "px-3 sm:px-6")}>{t("Order now")} <span aria-hidden="true">↗</span></a>
+            <a href={deliveryWhatsAppUrl} className={primary.replace("px-6", "px-3 sm:px-6")}>{t("Order now")}</a>
           </div>
         </nav>
       </header>
@@ -100,7 +100,7 @@ export default async function ServicesPage() {
                       <span className="w-fit rounded-full bg-emerald-50 px-2.5 py-1 text-xs font-medium text-emerald-800">{t(listing.category)}</span>
                       <h4 className="mt-4 text-lg font-semibold tracking-tight text-stone-900">{t(listing.name)}</h4>
                       <p className="mt-2 flex-1 text-sm leading-6 text-stone-500">{t(listing.description)}</p>
-                      <a href={createWhatsAppUrl(`I saw the demo listing for ${t(listing.name)} on your services page. Can you confirm whether pickup is available?`)} aria-label={t("Request delivery — {service}").replace("{service}", t(listing.name))} className={`${primary} mt-6 w-full px-3`}>{t("Request delivery")} <span aria-hidden="true">↗</span></a>
+                      <a href={createWhatsAppUrl(`I saw the demo listing for ${t(listing.name)} on your services page. Can you confirm whether pickup is available?`)} aria-label={t("Request delivery — {service}").replace("{service}", t(listing.name))} className={`${primary} mt-6 w-full px-3`}>{t("Request delivery")}</a>
                     </div>
                   </article>
                 ))}
@@ -116,7 +116,7 @@ export default async function ServicesPage() {
                     <span aria-hidden="true" className="flex size-11 items-center justify-center rounded-xl bg-emerald-50 text-2xl text-emerald-700">{service.icon}</span>
                     <h4 className="mt-4 font-semibold text-stone-900">{t(service.title)}</h4>
                     <p className="mt-2 flex-1 text-sm leading-6 text-stone-600">{t(service.description)}</p>
-                    <a href={createWhatsAppUrl(t("I’m interested in {service} from your services page.").replace("{service}", t(service.title)), locale)} aria-label={t("Request delivery — {service}").replace("{service}", t(service.title))} className="mt-4 inline-flex min-h-12 items-center gap-2 text-sm font-semibold text-emerald-700 hover:text-emerald-900">{t("Request delivery")} <span aria-hidden="true">↗</span></a>
+                    <a href={createWhatsAppUrl(t("I’m interested in {service} from your services page.").replace("{service}", t(service.title)), locale)} aria-label={t("Request delivery — {service}").replace("{service}", t(service.title))} className="mt-4 inline-flex min-h-12 items-center gap-2 text-sm font-semibold text-emerald-700 hover:text-emerald-900">{t("Request delivery")}</a>
                   </article>
                 ))}
               </div>
