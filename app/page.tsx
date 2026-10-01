@@ -1,7 +1,8 @@
+"use client";
+
 import BrandLogo from "./brand-logo";
-import { getLocale } from "./i18n/server";
 import { translator } from "./i18n/translations";
-import { LanguageWelcome } from "./language-picker";
+import { useVisitLocale } from "./language-picker";
 import Link from "next/link";
 import MobileNavigation from "./mobile-navigation";
 import { createWhatsAppUrl, deliveryPhoneUrl } from "./contact-links";
@@ -48,9 +49,8 @@ const faqs = [
   ["How can I become a Toslo driver?", "Contact Toslo to ask about driver opportunities and the current requirements."],
 ];
 
-export default async function Home() {
-  const locale = await getLocale();
-  if (!locale) return <LanguageWelcome />;
+export default function Home() {
+  const locale = useVisitLocale();
   const t = translator(locale);
   const deliveryWhatsAppUrl = createWhatsAppUrl("I'd like to request a delivery.", locale);
   const businessWhatsAppUrl = createWhatsAppUrl("I'd like to discuss deliveries for my business.", locale);

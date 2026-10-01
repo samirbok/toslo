@@ -1,33 +1,64 @@
 "use client";
 
 import BrandLogo from "./brand-logo";
-import { useEffect, useOptimistic, useRef } from "react";
-import { chooseLanguage } from "./i18n/actions";
+import { usePathname, useRouter } from "next/navigation";
+import { createContext, useContext, useEffect, useRef, useState, type ReactNode } from "react";
 import { languageNames, translator, type Locale } from "./i18n/translations";
 
 const languageFlags: Record<Locale, string> = { en: "🇬🇧", fr: "🇫🇷", ar: "🇲🇦" };
 
-export default function LanguagePicker({ locale, destination = "/" }: { locale?: Locale; destination?: string }) {
-  const t = translator(locale ?? "en");
-  const [selected, setSelected] = useOptimistic<Locale | undefined>(locale);
-  async function selectLanguage(formData: FormData) {
-    const language = formData.get("language");
-    if (language === "en" || language === "fr" || language === "ar") setSelected(language);
-    await chooseLanguage(formData);
-  }
+const LanguageVisitContext = createContext<{
+  locale: Locale | null;
+  selectLanguage: (locale: Locale) => void;
+} | null>(null);
+
+export function useVisitLocale(): Locale {
+  return useContext(LanguageVisitContext)?.locale ?? "en";
+}
+
+export function LanguageVisit({ children }: { children: ReactNode }) {
+  // Memory only: a new visit or refresh prompts again; navigation keeps the choice.
+  const [locale, setLocale] = useState<Locale | null>(null);
+  const pathname = usePathname();
+  const isPublicPage = pathname === "/" || pathname === "/services";
+
+  useEffect(() => {
+    document.documentElement.lang = locale ?? "en";
+    document.documentElement.dir = locale === "ar" ? "rtl" : "ltr";
+  }, [locale]);
+
   return (
-    <form action={selectLanguage}>
-      <input type="hidden" name="destination" value={destination} />
+    <LanguageVisitContext.Provider value={{ locale, selectLanguage: setLocale }}>
+      {isPublicPage && !locale ? <LanguageWelcome destination={pathname} /> : children}
+    </LanguageVisitContext.Provider>
+  );
+}
+
+export default function LanguagePicker({ locale, destination = "/" }: { locale?: Locale; destination?: string }) {
+  const visit = useContext(LanguageVisitContext);
+  const t = translator(locale ?? "en");
+  const router = useRouter();
+  const pathname = usePathname();
+  const selected = visit?.locale ?? locale;
+
+  function selectLanguage(language: Locale) {
+    // A tap advances immediately, even when the preview blocks cookies/storage.
+    visit?.selectLanguage(language);
+    if (pathname !== destination) router.replace(destination);
+  }
+
+  return (
+    <div>
       <fieldset className="flex flex-wrap items-center justify-center gap-2" dir="ltr">
         <legend className={locale ? "mb-3 w-full text-center text-sm text-gray-600" : "sr-only"}>{t("Change language")}</legend>
         {(Object.keys(languageNames) as Locale[]).map(language => (
-          <button key={language} type="submit" name="language" value={language} lang={language} aria-label={languageNames[language]} aria-pressed={selected === language} className={`flex min-h-24 min-w-16 cursor-pointer flex-col items-center justify-center gap-3 rounded-2xl border px-3 py-4 text-xs font-semibold shadow-sm transition-[background-color,border-color,box-shadow,transform] duration-200 active:scale-95 active:border-[#00875A] active:bg-[#ECFDF5] motion-reduce:transform-none motion-reduce:transition-none focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#00875A] sm:px-5 ${selected === language ? "border-[#00875A] bg-[#ECFDF5] text-[#007D53] ring-1 ring-[#00875A]/20" : "border-gray-200 bg-white text-gray-600 hover:border-[#00875A]/50 hover:bg-[#ECFDF5] hover:text-[#007D53] hover:shadow-md"}`}>
+          <button key={language} type="button" onClick={() => selectLanguage(language)} lang={language} aria-label={languageNames[language]} aria-pressed={selected === language} className={`flex min-h-24 min-w-16 cursor-pointer flex-col items-center justify-center gap-3 rounded-2xl border px-3 py-4 text-xs font-semibold shadow-sm transition-[background-color,border-color,box-shadow,transform] duration-200 active:scale-95 active:border-[#00875A] active:bg-[#ECFDF5] motion-reduce:transform-none motion-reduce:transition-none focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#00875A] sm:px-5 ${selected === language ? "border-[#00875A] bg-[#ECFDF5] text-[#007D53] ring-1 ring-[#00875A]/20" : "border-gray-200 bg-white text-gray-600 hover:border-[#00875A]/50 hover:bg-[#ECFDF5] hover:text-[#007D53] hover:shadow-md"}`}>
             <span aria-hidden="true" className="text-4xl leading-none">{languageFlags[language]}</span>
             <span>{languageNames[language]}</span>
           </button>
         ))}
       </fieldset>
-    </form>
+    </div>
   );
 }
 

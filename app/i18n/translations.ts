@@ -124,6 +124,8 @@ const translations: Record<string, [string, string]> = {
 "Request delivery — {service}": ["Demander une livraison — {service}", "اطلب التوصيل — {service}"],
 "Toslo is your local delivery service in Agadir, Taghazout and Tamraght for parcels, food, documents, shopping, local orders and errands.": ["Toslo livre vos colis, repas, documents, courses et commandes locales à Agadir, Taghazout et Tamraght, et facilite vos petites courses du quotidien.", "توسلو خدمة التوصيل المحلية في أكادير وتغازوت وتمراغت للطرود والوجبات والوثائق والمشتريات والطلبات والمشاوير اليومية."],
 "Order your delivery on WhatsApp in just a few steps and let a local Toslo driver take care of the rest.": ["Commandez votre livraison sur WhatsApp en quelques étapes et laissez un livreur Toslo s’occuper du reste.", "اطلب التوصيل عبر واتساب بخطوات بسيطة ودع أحد مندوبي توسلو يتكفل بالباقي."],
+"Opening your page…": ["Ouverture de votre page…", "جارٍ فتح الصفحة…"],
+"Could not open the page. Please try again.": ["Impossible d’ouvrir la page. Veuillez réessayer.", "تعذر فتح الصفحة. يرجى المحاولة مرة أخرى."],
 };
 export function translator(locale: Locale) {
   return (text: string) => locale === "en" ? text : translations[text]?.[locale === "fr" ? 0 : 1] ?? text;

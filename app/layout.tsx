@@ -1,9 +1,9 @@
-import { getLocale } from "./i18n/server";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { homeTitle, homeDescription, pageMetadata, siteUrl } from "./seo";
 import BusinessJsonLd from "./business-json-ld";
+import { LanguageVisit } from "./language-picker";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -29,16 +29,15 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function RootLayout({ children }: LayoutProps<"/">) {
-  const locale = await getLocale() ?? "en";
+export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
-      lang={locale}
-      dir={locale === "ar" ? "rtl" : "ltr"}
+      lang="en"
+      dir="ltr"
       data-scroll-behavior="smooth"
       className={`${geistSans.variable} ${geistMono.variable} h-full scroll-smooth motion-reduce:scroll-auto antialiased`}
     >
-      <body className="min-h-full flex flex-col"><BusinessJsonLd />{children}</body>
+      <body className="min-h-full flex flex-col"><BusinessJsonLd /><LanguageVisit>{children}</LanguageVisit></body>
     </html>
   );
 }
