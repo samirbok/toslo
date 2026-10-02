@@ -61,15 +61,12 @@ export default function Home() {
         <nav aria-label={t("Main navigation")} className={`${container} flex h-20 items-center justify-between gap-2 sm:gap-4`}>
           <div className="flex items-center gap-2 sm:gap-3">
             <MobileNavigation home locale={locale} />
-            <Link href="/" dir="ltr" className="inline-flex shrink-0 items-center"><BrandLogo /></Link>
+            <Link href="/" dir="ltr" className="inline-flex shrink-0 items-center max-lg:absolute max-lg:top-0 max-lg:left-1/2 max-lg:-translate-x-1/2"><BrandLogo className="size-20 lg:size-16" /></Link>
           </div>
           <div className="hidden items-center gap-6 text-sm font-medium text-gray-600 lg:flex">
             {[["Services", "services"], ["How it works", "how-it-works"], ["Pricing", "pricing"], ["Zones", "zones"], ["Reviews", "reviews"], ["Contact", "contact"]].map(([label, id]) => (
               <a key={id} href={id === "services" ? "/services" : `#${id}`} className="transition-colors hover:text-[#007D53]">{t(label)}</a>
             ))}
-          </div>
-          <div className="flex shrink-0 items-center gap-1 sm:gap-3">
-            <a href={deliveryWhatsAppUrl} className={primary.replace("px-6", "px-3 sm:px-6")}>{t("Order now")}</a>
           </div>
         </nav>
       </header>

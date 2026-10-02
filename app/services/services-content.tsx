@@ -33,22 +33,18 @@ const serviceGroups = [
 export default function ServicesContent() {
   const locale = useVisitLocale();
   const t = translator(locale);
-  const deliveryWhatsAppUrl = createWhatsAppUrl("I'd like to request a delivery.", locale);
   return (
     <div className="min-h-screen bg-stone-50 text-stone-800 [&_a:focus-visible]:outline-2 [&_a:focus-visible]:outline-offset-4 [&_a:focus-visible]:outline-emerald-700">
       <header className="relative z-50 border-b border-stone-200 bg-white">
         <nav aria-label={t("Main navigation")} className={`${container} flex h-20 items-center justify-between gap-2 sm:gap-4`}>
           <div className="flex items-center gap-2 sm:gap-3">
             <MobileNavigation locale={locale} />
-            <Link href="/" dir="ltr" className="inline-flex shrink-0 items-center"><BrandLogo /></Link>
+            <Link href="/" dir="ltr" className="inline-flex shrink-0 items-center max-lg:absolute max-lg:top-0 max-lg:left-1/2 max-lg:-translate-x-1/2"><BrandLogo className="size-20 lg:size-16" /></Link>
           </div>
           <div className="hidden items-center gap-6 text-sm font-medium text-stone-600 lg:flex">
             {[["Services", "services"], ["How it works", "how-it-works"], ["Pricing", "pricing"], ["Zones", "zones"], ["Reviews", "reviews"], ["Contact", "contact"]].map(([label, id]) => (
               <Link key={id} href={id === "services" ? "/services" : `/#${id}`} className="transition-colors hover:text-emerald-700">{t(label)}</Link>
             ))}
-          </div>
-          <div className="flex shrink-0 items-center gap-1 sm:gap-3">
-            <a href={deliveryWhatsAppUrl} className={primary.replace("px-6", "px-3 sm:px-6")}>{t("Order now")}</a>
           </div>
         </nav>
       </header>
