@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   // Update this date when the public page content changes.
-  const lastModified = "2026-10-01";
+  const lastModified = "2026-10-02";
 
   return [
     {
@@ -10,12 +10,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified,
       changeFrequency: "weekly",
       priority: 1,
-    },
-    {
-      url: "https://www.delivery-agadir.com/services",
-      lastModified,
-      changeFrequency: "monthly",
-      priority: 0.8,
     },
     {
       url: "https://www.delivery-agadir.com/contact",

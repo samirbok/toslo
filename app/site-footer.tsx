@@ -4,7 +4,7 @@ import { translator, type Locale } from "./i18n/translations";
 
 const groups = [
   { title: "Company", links: [["Contact", "#contact"], ["Reviews", "#reviews"]] },
-  { title: "Services", links: [["Food delivery", "/services"], ["Parcels", "/services"], ["Documents", "/services"], ["Business delivery", "#business"]] },
+  { title: "Services", links: [["Food delivery", "/#services"], ["Parcels", "/#services"], ["Documents", "/#services"], ["Business delivery", "#business"]] },
   { title: "Useful links", links: [["Delivery zones", "#zones"], ["Pricing", "#pricing"], ["Become a driver", "#contact"]] },
 ];
 

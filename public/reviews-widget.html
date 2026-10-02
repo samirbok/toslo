@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Toslo customer reviews</title>
+    <style>
+      html, body { margin: 0; background: transparent; }
+      #reviews { display: flow-root; }
+      a[href*="elfsight.com"] { display: none !important; }
+    </style>
+  </head>
+  <body>
+    <div id="reviews">
+      <div class="elfsight-app-6365c76a-bfbd-46e1-b404-5cb7e6177859"></div>
+    </div>
+    <script>
+      const reviews = document.getElementById("reviews");
+      new ResizeObserver(() => {
+        parent.postMessage({ type: "toslo-reviews-height", height: reviews.getBoundingClientRect().height }, location.origin);
+      }).observe(reviews);
+    </script>
+    <script src="https://elfsightcdn.com/platform.js" async></script>
+  </body>
+</html>

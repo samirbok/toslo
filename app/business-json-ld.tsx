@@ -31,7 +31,7 @@ const structuredData = {
       "@id": `${siteUrl}/#delivery-service`,
       name: "Toslo Delivery",
       serviceType: "Livraison de colis, repas, documents, courses et commandes locales",
-      url: `${siteUrl}/services`,
+      url: `${siteUrl}/#services`,
       provider: { "@id": businessId },
       areaServed,
     },

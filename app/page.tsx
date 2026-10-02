@@ -1,5 +1,6 @@
 "use client";
 
+import ServicesContent from "./services/services-content";
 import ThemeToggle from "./theme-toggle";
 import SiteFooter from "./site-footer";
 
@@ -9,7 +10,7 @@ import { useVisitLocale } from "./language-picker";
 import Link from "next/link";
 import MobileNavigation from "./mobile-navigation";
 import { createWhatsAppUrl, deliveryPhoneUrl } from "./contact-links";
-import Script from "next/script";
+import ReviewsWidget from "./reviews-widget";
 import HeroSlider from "./hero-slider";
 import ContactSection from "./contact-section";
 import DeliveryAreas from "./delivery-areas";
@@ -68,7 +69,7 @@ export default function Home() {
           </div>
           <div className="hidden items-center gap-6 text-sm font-medium text-gray-600 dark:text-[#B9C6BD] lg:flex">
             {[["Services", "services"], ["How it works", "how-it-works"], ["Pricing", "pricing"], ["Zones", "zones"], ["Reviews", "reviews"], ["Contact", "contact"]].map(([label, id]) => (
-              <a key={id} href={id === "services" ? "/services" : `#${id}`} className="transition-colors hover:text-[#007D53] dark:hover:text-[#69D5A3]">{t(label)}</a>
+              <Link key={id} href={`#${id}`} className="transition-colors hover:text-[#007D53] dark:hover:text-[#69D5A3]">{t(label)}</Link>
             ))}
           </div>
           <ThemeToggle locale={locale} />
@@ -78,15 +79,15 @@ export default function Home() {
       <main id="main">
         <section aria-labelledby="hero-heading" className={`${sectionFrame} relative isolate flex items-center overflow-hidden bg-[#FAFAF8] dark:bg-[#101A15]`}>
           <div aria-hidden="true" className="absolute -top-36 -right-32 -z-10 size-[520px] rounded-full border-[60px] border-[#00875A]/5" />
-          <div className={`${container} grid items-center gap-6 lg:grid-cols-2 lg:gap-16`}>
-            <h1 id="hero-heading" className="order-first mx-auto w-full text-center text-[2.5rem] leading-[1.08] font-bold tracking-tight sm:text-6xl lg:col-span-2 lg:text-6xl"><span className="text-[#00875A] dark:text-[#69D5A3]">{t("Your delivery,")}</span><br className="lg:hidden" />{" "}<span className="text-[#E5A83B]">{t("made simple.")}</span></h1>
-            <div className="mx-auto w-full max-w-lg pt-2 text-center lg:mx-0 lg:pt-0 lg:text-start">
-              <p className="text-base leading-7 text-gray-700 dark:text-[#CDD6D0] sm:text-lg sm:leading-8">{t("Toslo is your local delivery service in Agadir, Taghazout and Tamraght for parcels, food, documents, shopping, local orders and errands.")}</p>
-              <p className="mt-4 text-sm leading-6 text-gray-600 dark:text-[#B9C6BD] sm:text-base sm:leading-7">{t("Order your delivery on WhatsApp in just a few steps and let a local Toslo driver take care of the rest.")}</p>
-              <div className="mt-8 hidden gap-3 lg:flex"><a href={deliveryWhatsAppUrl} className={whatsapp}>{t("Order on WhatsApp")}</a><a href={deliveryPhoneUrl} className={callUs}>{t("Call us")}</a></div>
-              <Link href="/services" className="mt-5 inline-flex min-h-11 items-center gap-3 text-sm font-semibold text-gray-600 dark:text-[#B9C6BD] hover:text-[#007D53] dark:hover:text-[#69D5A3]">{t("Our services")}</Link>
+          <div className={`${container} grid items-center gap-6 lg:grid-cols-2 lg:grid-rows-[auto_1fr_auto] lg:gap-x-16 lg:gap-y-8`}>
+            <h1 id="hero-heading" className="order-first mx-auto w-full text-center text-5xl leading-[1.08] font-bold tracking-tight sm:text-7xl lg:col-start-1 lg:row-start-1 lg:self-start lg:pt-4 lg:text-start lg:text-7xl lg:leading-[1.08]"><span className="text-[#00875A] dark:text-[#69D5A3] lg:whitespace-nowrap">{t("Stay In.")}</span><br />{" "}<span className="text-[#E5A83B] lg:whitespace-nowrap">{t("We Deliver.")}</span></h1>
+            <div className="mx-auto w-full max-w-lg pt-2 text-center lg:col-start-1 lg:row-start-2 lg:mx-0 lg:pt-0 lg:text-start">
+              <p className="text-base leading-7 text-gray-700 dark:text-[#CDD6D0] sm:text-lg sm:leading-8 lg:font-medium">{t("Toslo is your local delivery service in Agadir, Taghazout and Tamraght for parcels, food, documents, shopping, local orders and errands.")}</p>
+              <p className="mt-4 text-sm leading-6 text-gray-600 dark:text-[#B9C6BD] sm:text-base sm:leading-7 lg:font-medium">{t("Order your delivery on WhatsApp in just a few steps and let a local Toslo driver take care of the rest.")}</p>
+              <Link href="#services" className="mt-5 inline-flex min-h-11 items-center gap-3 text-sm font-semibold text-gray-600 dark:text-[#B9C6BD] hover:text-[#007D53] dark:hover:text-[#69D5A3]">{t("Our services")}</Link>
             </div>
-            <div className="-order-1 min-w-0 lg:order-last">
+            <div className="hidden gap-3 lg:col-start-1 lg:row-start-3 lg:flex lg:pb-6"><a href={deliveryWhatsAppUrl} className={whatsapp}>{t("Order on WhatsApp")}</a><a href={deliveryPhoneUrl} className={callUs}>{t("Call us")}</a></div>
+            <div className="-order-1 min-w-0 lg:order-last lg:col-start-2 lg:row-start-1 lg:row-span-3">
               <HeroSlider locale={locale} />
               <div className="mx-auto mt-5 flex w-full max-w-lg flex-col gap-3 lg:hidden">
                 <a href={deliveryWhatsAppUrl} className={whatsapp}>{t("Order on WhatsApp")}</a>
@@ -101,6 +102,8 @@ export default function Home() {
             {[["↗", "Fast delivery"], ["♡", "Local drivers"], ["◎", "Agadir coverage"], ["✓", "Easy ordering"]].map(([icon, label]) => <li key={label} className="flex items-center gap-3 text-sm font-semibold"><span aria-hidden="true" className="flex size-9 shrink-0 items-center justify-center rounded-full bg-[#ECFDF5] dark:bg-[#203C2E] text-lg text-[#1A1A1A] dark:text-[#F2F5F3]">{icon}</span>{t(label)}</li>)}
           </ul>
         </div>
+
+        <ServicesContent />
 
         <section id="how-it-works" aria-labelledby="how-heading" className={`${container} ${sectionFrame} flex flex-col justify-center`}>
           <div className="mx-auto max-w-2xl text-center"><p className={eyebrow}>{t("How it works")}</p><h2 id="how-heading" className={heading}>{t("Delivery made simple")}</h2><p className="mt-4 leading-7 text-gray-600 dark:text-[#B9C6BD]">{t("A few details from you. A local driver for the journey. Toslo makes local delivery quick and straightforward.")}</p></div>
@@ -205,13 +208,7 @@ export default function Home() {
 
         <section id="reviews" aria-labelledby="reviews-heading" className={`${sectionFrame} flex items-center justify-center bg-[#FAFAF8] dark:bg-[#101A15]`}>
           <div className={container}><div className="mx-auto max-w-2xl text-center"><p className={eyebrow}>{t("Customer reviews")}</p><h2 id="reviews-heading" className={heading}>{t("What our customers say")}</h2><p className="mt-4 leading-7 text-gray-600 dark:text-[#B9C6BD]">{t("See what customers think about their Toslo delivery experience.")}</p></div>
-            <div className="mt-8 min-h-80 w-full [&_a[href*='elfsight.com']]:hidden!">
-              <div
-                className="elfsight-app-6365c76a-bfbd-46e1-b404-5cb7e6177859"
-                data-elfsight-app-lazy=""
-              />
-            </div>
-            <Script src="https://elfsightcdn.com/platform.js" strategy="afterInteractive" />
+            <ReviewsWidget title={t("Customer reviews")} />
 
             <div className="mt-8 text-center"><a href="https://maps.app.goo.gl/X78CjoVafbTbxb4R6" target="_blank" rel="noopener noreferrer" className={secondary}>{t("View reviews on Google")}<span className="sr-only"> {t("(opens in a new tab)")}</span></a></div>
           </div>

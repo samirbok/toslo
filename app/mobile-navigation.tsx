@@ -33,7 +33,7 @@ export default function MobileNavigation({ home = false, locale = "en" }: { home
   useEffect(() => {
     if (pathname !== "/") return;
     const section = window.location.hash.slice(1);
-    if (!items.some(item => item.section === section && section !== "services")) return;
+    if (!items.some(item => item.section === section)) return;
     const frame = window.requestAnimationFrame(() => scrollToSection(section));
     return () => window.cancelAnimationFrame(frame);
   }, [pathname]);
@@ -41,7 +41,7 @@ export default function MobileNavigation({ home = false, locale = "en" }: { home
   function selectLink(event: MouseEvent<HTMLAnchorElement>, section: string) {
     if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
     setOpen(false);
-    if (pathname !== "/" || section === "services") return;
+    if (pathname !== "/") return;
 
     // Scroll explicitly after closing the dropdown, including repeated hash clicks.
     event.preventDefault();
@@ -112,21 +112,18 @@ export default function MobileNavigation({ home = false, locale = "en" }: { home
         </div>
         <ul className="max-h-[calc(100dvh-168px)] space-y-1 overflow-y-auto overscroll-contain p-2">
           {items.map(({ label, section, icon }) => {
-            const href = section === "services" ? "/services" : `${home ? "" : "/"}#${section}`;
-            const active = section === "services" && pathname === "/services";
+            const href = `${home ? "" : "/"}#${section}`;
             return (
               <li key={section}>
                 <Link
                   href={href}
-                  aria-current={active ? "page" : undefined}
                   onClick={event => selectLink(event, section)}
-                  className={`group flex min-h-12 items-center gap-3 rounded-2xl px-3 py-2 text-sm font-semibold transition-colors duration-150 hover:bg-[#ECFDF5] dark:hover:bg-[#203C2E] hover:text-[#007D53] dark:hover:text-[#69D5A3] focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-[#00875A] motion-reduce:transition-none ${active ? "bg-[#ECFDF5] dark:bg-[#203C2E] text-[#007D53] dark:text-[#69D5A3]" : "text-[#171717] dark:text-[#F2F5F3]"}`}
+                  className={`group flex min-h-12 items-center gap-3 rounded-2xl px-3 py-2 text-sm font-semibold transition-colors duration-150 hover:bg-[#ECFDF5] dark:hover:bg-[#203C2E] hover:text-[#007D53] dark:hover:text-[#69D5A3] focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-[#00875A] motion-reduce:transition-none text-[#171717] dark:text-[#F2F5F3]`}
                 >
                   <span className="flex size-9 shrink-0 items-center justify-center rounded-xl bg-[#00875A]/[0.06] text-[#007D53] dark:text-[#69D5A3]">
                     <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" className="size-[18px]"><path d={icon} /></svg>
                   </span>
                   {t(label)}
-                  {active && <span aria-hidden="true" className="ms-auto size-1.5 rounded-full bg-[#E5A83B]" />}
                 </Link>
               </li>
             );

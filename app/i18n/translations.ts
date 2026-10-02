@@ -5,6 +5,14 @@ export function isLocale(value: unknown): value is Locale {
 }
 // English source strings remain stable keys; names and numbers need no translation.
 const translations: Record<string, [string, string]> = {
+"Whatever you need, Toslo delivers.": ["Tout ce qu’il vous faut, Toslo vous le livre.", "كل ما تحتاجه، توسلو يوصله."],
+"Food, groceries, shopping, documents and more — delivered across Agadir.": ["Repas, courses, achats, documents et bien plus — livrés partout à Agadir.", "وجبات، مواد غذائية، مشتريات، وثائق وأكثر — نوصلها في أنحاء أكادير."],
+"Fast • Local • Reliable": ["Rapide • Local • Fiable", "سريع • محلي • موثوق"],
+"Can’t find what you need?": ["Vous ne trouvez pas ce qu’il vous faut ?", "لم تجد ما تحتاجه؟"],
+"Tell us what you want delivered and we’ll handle the rest.": ["Dites-nous ce que vous souhaitez faire livrer, nous nous occupons du reste.", "أخبرنا بما تريد توصيله وسنتكفل بالباقي."],
+"Create a custom delivery": ["Créer une livraison personnalisée", "اطلب توصيلاً مخصصاً"],
+"Restaurant example": ["Exemple de restaurant", "مثال لمطعم"],
+"Sushi example": ["Exemple de sushi", "مثال للسوشي"],
 "TikTok": ["TikTok", "تيك توك"],
 "Services": ["Services", "الخدمات"],
 "How it works": ["Comment ça marche", "كيف تعمل الخدمة"],
@@ -16,8 +24,8 @@ const translations: Record<string, [string, string]> = {
 "Skip to content": ["Aller au contenu", "انتقل إلى المحتوى"],
 "Main navigation": ["Navigation principale", "القائمة الرئيسية"],
 "Navigation menu": ["Menu de navigation", "قائمة التنقل"],
-"Your delivery,": ["Vos livraisons,", "توصيل طلباتك،"],
-"made simple.": ["en toute simplicité.", "بكل سهولة."],
+"Stay In.": ["Restez chez vous.", "ابقَ في بيتك."],
+"We Deliver.": ["Nous livrons.", "نحن نوصل."],
 "Toslo makes it easy to send parcels, food, documents, shopping and local orders across Agadir.": ["Avec Toslo, envoyez facilement vos colis, repas, documents, courses et commandes locales partout à Agadir.", "مع توسلو، أرسل الطرود والوجبات والوثائق والمشتريات والطلبات المحلية بسهولة في جميع أنحاء أكادير."],
 "Request your delivery in just a few steps and let a local Toslo driver take care of the rest.": ["Demandez votre livraison en quelques étapes et laissez un livreur Toslo s’occuper du reste.", "اطلب التوصيل بخطوات بسيطة ودع أحد مندوبي توسلو يتكفل بالباقي."],
 "Order on WhatsApp": ["Commander sur WhatsApp", "اطلب عبر واتساب"],

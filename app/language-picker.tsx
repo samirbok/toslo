@@ -2,10 +2,43 @@
 
 import BrandLogo from "./brand-logo";
 import { usePathname, useRouter } from "next/navigation";
-import { createContext, useContext, useEffect, useRef, useState, type ReactNode } from "react";
+import { createContext, useContext, useEffect, useRef, useSyncExternalStore, type ReactNode } from "react";
 import { languageNames, translator, type Locale } from "./i18n/translations";
 
 const languageFlags: Record<Locale, string> = { en: "🇬🇧", fr: "🇫🇷", ar: "🇲🇦" };
+
+const languageSessionKey = "toslo-visit-language";
+const languageChangeEvent = "toslo-language-change";
+let visitLocale: Locale | null = null;
+
+function getVisitLocale(): Locale | null {
+  try {
+    const saved = window.sessionStorage.getItem(languageSessionKey);
+    if (saved === "en" || saved === "fr" || saved === "ar") return saved;
+  } catch {
+    // Keep navigation working when the browser blocks storage.
+  }
+  return visitLocale;
+}
+
+function selectVisitLanguage(locale: Locale) {
+  visitLocale = locale;
+  try {
+    window.sessionStorage.setItem(languageSessionKey, locale);
+  } catch {
+    // The in-memory choice still works without storage access.
+  }
+  window.dispatchEvent(new Event(languageChangeEvent));
+}
+
+function subscribeToLanguage(onChange: () => void) {
+  window.addEventListener(languageChangeEvent, onChange);
+  return () => window.removeEventListener(languageChangeEvent, onChange);
+}
+
+function getServerLocale(): null {
+  return null;
+}
 
 const LanguageVisitContext = createContext<{
   locale: Locale | null;
@@ -17,8 +50,8 @@ export function useVisitLocale(): Locale {
 }
 
 export function LanguageVisit({ children }: { children: ReactNode }) {
-  // Memory only: a new visit or refresh prompts again; navigation keeps the choice.
-  const [locale, setLocale] = useState<Locale | null>(null);
+  // Keep the choice across navigation and refreshes within this browser session.
+  const locale = useSyncExternalStore(subscribeToLanguage, getVisitLocale, getServerLocale);
   const pathname = usePathname();
   const isPublicPage = pathname === "/" || pathname === "/services";
 
@@ -28,7 +61,7 @@ export function LanguageVisit({ children }: { children: ReactNode }) {
   }, [locale]);
 
   return (
-    <LanguageVisitContext.Provider value={{ locale, selectLanguage: setLocale }}>
+    <LanguageVisitContext.Provider value={{ locale, selectLanguage: selectVisitLanguage }}>
       {isPublicPage && !locale ? <LanguageWelcome destination={pathname} /> : children}
     </LanguageVisitContext.Provider>
   );
