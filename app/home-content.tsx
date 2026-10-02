@@ -65,7 +65,7 @@ export default function Home() {
         <nav dir="ltr" aria-label={t("Main navigation")} className={`${container} flex h-20 items-center justify-between gap-2 sm:gap-4`}>
           <div className="flex items-center gap-2 sm:gap-3">
             <MobileNavigation home locale={locale} />
-            <Link href="/" dir="ltr" className="inline-flex shrink-0 items-center max-lg:absolute max-lg:top-0 max-lg:left-1/2 max-lg:-translate-x-1/2"><BrandLogo className="size-20 lg:size-16" /></Link>
+            <Link href={`/${locale}`} dir="ltr" className="inline-flex shrink-0 items-center max-lg:absolute max-lg:top-0 max-lg:left-1/2 max-lg:-translate-x-1/2"><BrandLogo className="size-20 lg:size-16" /></Link>
           </div>
           <div className="hidden items-center gap-6 text-sm font-medium text-gray-600 dark:text-[#B9C6BD] lg:flex">
             {[["Services", "services"], ["How it works", "how-it-works"], ["Pricing", "pricing"], ["Zones", "zones"], ["Reviews", "reviews"], ["Contact", "contact"]].map(([label, id]) => (

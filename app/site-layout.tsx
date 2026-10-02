@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
-import { homeTitle, homeDescription, pageMetadata, siteUrl } from "./seo";
+import { siteUrl } from "./seo";
 import BusinessJsonLd from "./business-json-ld";
+import type { Locale } from "./i18n/translations";
 import { LanguageVisit } from "./language-picker";
 
 const geistSans = Geist({
@@ -18,11 +19,6 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  ...pageMetadata(homeTitle, homeDescription, ""),
-  keywords: [
-    "delivery Agadir", "livraison Agadir", "livreur Agadir",
-    "service de livraison à Agadir", "delivery Taghazout", "delivery Tamraght",
-  ],
   robots: {
     index: true,
     follow: true,
@@ -30,12 +26,12 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default function SiteLayout({ children, locale }: { children: React.ReactNode; locale?: Locale }) {
   return (
     <html
       suppressHydrationWarning
-      lang="en"
-      dir="ltr"
+      lang={locale ?? "en"}
+      dir={locale === "ar" ? "rtl" : "ltr"}
       data-scroll-behavior="smooth"
       className={`${geistSans.variable} ${geistMono.variable} h-full scroll-smooth motion-reduce:scroll-auto antialiased`}
     >
@@ -43,8 +39,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <script id="toslo-theme" dangerouslySetInnerHTML={{ __html: `(function(){var theme;try{theme=localStorage.getItem('toslo-theme')}catch(e){}if(theme!=='dark'&&theme!=='light'){theme=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'}document.documentElement.dataset.theme=theme})()` }} />
       </head>
       <body className="min-h-full flex flex-col">
-        <BusinessJsonLd />
-        <LanguageVisit>{children}</LanguageVisit>
+        {locale && <BusinessJsonLd locale={locale} />}
+        <LanguageVisit initialLocale={locale}>{children}</LanguageVisit>
         <Script
           id="google-analytics-tag"
           src="https://www.googletagmanager.com/gtag/js?id=G-820BPZEDNC"

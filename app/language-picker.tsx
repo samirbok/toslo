@@ -49,11 +49,15 @@ export function useVisitLocale(): Locale {
   return useContext(LanguageVisitContext)?.locale ?? "en";
 }
 
-export function LanguageVisit({ children }: { children: ReactNode }) {
+export function LanguageVisit({ children, initialLocale }: { children: ReactNode; initialLocale?: Locale }) {
   // Keep the choice across navigation and refreshes within this browser session.
-  const locale = useSyncExternalStore(subscribeToLanguage, getVisitLocale, getServerLocale);
+  const savedLocale = useSyncExternalStore(subscribeToLanguage, getVisitLocale, getServerLocale);
+  const locale = initialLocale ?? savedLocale;
+  const router = useRouter();
   const pathname = usePathname();
-  const isPublicPage = pathname === "/" || pathname === "/services";
+  useEffect(() => {
+    if (pathname === "/" && savedLocale) router.replace(`/${savedLocale}${window.location.hash}`);
+  }, [pathname, savedLocale, router]);
 
   useEffect(() => {
     document.documentElement.lang = locale ?? "en";
@@ -62,7 +66,7 @@ export function LanguageVisit({ children }: { children: ReactNode }) {
 
   return (
     <LanguageVisitContext.Provider value={{ locale, selectLanguage: selectVisitLanguage }}>
-      {isPublicPage && !locale ? <LanguageWelcome destination={pathname} /> : children}
+      {children}
     </LanguageVisitContext.Provider>
   );
 }
@@ -70,14 +74,15 @@ export function LanguageVisit({ children }: { children: ReactNode }) {
 export default function LanguagePicker({ locale, destination = "/" }: { locale?: Locale; destination?: string }) {
   const visit = useContext(LanguageVisitContext);
   const t = translator(locale ?? "en");
-  const router = useRouter();
-  const pathname = usePathname();
   const selected = visit?.locale ?? locale;
 
   function selectLanguage(language: Locale) {
-    // A tap advances immediately, even when the preview blocks cookies/storage.
     visit?.selectLanguage(language);
-    if (pathname !== destination) router.replace(destination);
+  }
+
+  function languageUrl(language: Locale) {
+    const section = destination.includes("#") ? destination.slice(destination.indexOf("#")) : "";
+    return `/${language}${section}`;
   }
 
   return (
@@ -85,10 +90,13 @@ export default function LanguagePicker({ locale, destination = "/" }: { locale?:
       <fieldset className="flex flex-wrap items-center justify-center gap-2" dir="ltr">
         <legend className={locale ? "mb-3 w-full text-center text-sm text-gray-600 dark:text-[#B9C6BD]" : "sr-only"}>{t("Change language")}</legend>
         {(Object.keys(languageNames) as Locale[]).map(language => (
-          <button key={language} type="button" onClick={() => selectLanguage(language)} lang={language} aria-label={languageNames[language]} aria-pressed={selected === language} className={`flex min-h-24 min-w-16 cursor-pointer flex-col items-center justify-center gap-3 rounded-2xl border px-3 py-4 text-xs font-semibold shadow-sm transition-[background-color,border-color,box-shadow,transform] duration-200 active:scale-95 active:border-[#00875A] active:bg-[#ECFDF5] dark:active:bg-[#203C2E] motion-reduce:transform-none motion-reduce:transition-none focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#00875A] sm:px-5 ${selected === language ? "border-[#00875A] bg-[#ECFDF5] dark:bg-[#203C2E] text-[#007D53] dark:text-[#69D5A3] ring-1 ring-[#00875A]/20" : "border-gray-200 dark:border-[#34483B] bg-white dark:bg-[#1B2822] text-gray-600 dark:text-[#B9C6BD] hover:border-[#00875A]/50 hover:bg-[#ECFDF5] dark:hover:bg-[#203C2E] hover:text-[#007D53] dark:hover:text-[#69D5A3] hover:shadow-md"}`}>
+          <a key={language} href={languageUrl(language)} onClick={event => {
+            if (!destination.includes("#")) event.currentTarget.href = `/${language}${window.location.hash}`;
+            selectLanguage(language);
+          }} lang={language} hrefLang={language} aria-label={languageNames[language]} aria-current={selected === language ? "page" : undefined} className={`flex min-h-24 min-w-16 cursor-pointer flex-col items-center justify-center gap-3 rounded-2xl border px-3 py-4 text-xs font-semibold shadow-sm transition-[background-color,border-color,box-shadow,transform] duration-200 active:scale-95 active:border-[#00875A] active:bg-[#ECFDF5] dark:active:bg-[#203C2E] motion-reduce:transform-none motion-reduce:transition-none focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#00875A] sm:px-5 ${selected === language ? "border-[#00875A] bg-[#ECFDF5] dark:bg-[#203C2E] text-[#007D53] dark:text-[#69D5A3] ring-1 ring-[#00875A]/20" : "border-gray-200 dark:border-[#34483B] bg-white dark:bg-[#1B2822] text-gray-600 dark:text-[#B9C6BD] hover:border-[#00875A]/50 hover:bg-[#ECFDF5] dark:hover:bg-[#203C2E] hover:text-[#007D53] dark:hover:text-[#69D5A3] hover:shadow-md"}`}>
             <span aria-hidden="true" className="text-4xl leading-none">{languageFlags[language]}</span>
             <span>{languageNames[language]}</span>
-          </button>
+          </a>
         ))}
       </fieldset>
     </div>

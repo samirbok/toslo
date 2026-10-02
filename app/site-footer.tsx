@@ -17,7 +17,7 @@ export default function SiteFooter({ locale }: { locale: Locale }) {
       <div className="mx-auto w-full max-w-[1200px] px-6">
         <div className="lg:grid lg:grid-cols-[1.3fr_0.8fr_1fr_1fr] lg:gap-10">
           <div className="text-center lg:text-start">
-            <Link href="/" className="inline-flex"><BrandLogo className="size-20" /></Link>
+            <Link href={`/${locale}`} className="inline-flex"><BrandLogo className="size-20" /></Link>
             <p className="mx-auto mt-2 max-w-[240px] text-sm leading-6 text-[#5B6472] dark:text-[#B9C6BD] lg:mx-0">{t("Local delivery made simple in Agadir.")}</p>
           </div>
 
@@ -32,7 +32,7 @@ export default function SiteFooter({ locale }: { locale: Locale }) {
                 </summary>
                 <nav aria-label={t(group.title)} className="pb-3">
                   <ul className="grid grid-cols-2 gap-x-4">
-                    {group.links.map(([label, href]) => <li key={label}><Link href={href} className={linkStyle}>{t(label)}</Link></li>)}
+                    {group.links.map(([label, href]) => <li key={label}><Link href={href.startsWith("/") ? `/${locale}${href.slice(1)}` : href} className={linkStyle}>{t(label)}</Link></li>)}
                   </ul>
                 </nav>
               </details>
@@ -42,7 +42,7 @@ export default function SiteFooter({ locale }: { locale: Locale }) {
           {groups.map(group => (
             <nav key={group.title} aria-label={t(group.title)} className="hidden pt-4 lg:block">
               <h2 className="text-sm font-semibold text-[#171717] dark:text-[#F2F5F3]">{t(group.title)}</h2>
-              <ul className="mt-3">{group.links.map(([label, href]) => <li key={label}><Link href={href} className={linkStyle}>{t(label)}</Link></li>)}</ul>
+              <ul className="mt-3">{group.links.map(([label, href]) => <li key={label}><Link href={href.startsWith("/") ? `/${locale}${href.slice(1)}` : href} className={linkStyle}>{t(label)}</Link></li>)}</ul>
             </nav>
           ))}
         </div>

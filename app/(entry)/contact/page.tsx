@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation";
 import type { Metadata } from "next";
-import { pageMetadata } from "../seo";
+import { pageMetadata } from "../../seo";
 
 // Contact currently redirects to the homepage; keep its canonical on that destination.
 export const metadata: Metadata = pageMetadata(

@@ -31,17 +31,17 @@ export default function MobileNavigation({ home = false, locale = "en" }: { home
 
   // Sections mount after client navigation (or after choosing a language).
   useEffect(() => {
-    if (pathname !== "/") return;
+    if (pathname !== "/" && pathname !== `/${locale}`) return;
     const section = window.location.hash.slice(1);
     if (!items.some(item => item.section === section)) return;
     const frame = window.requestAnimationFrame(() => scrollToSection(section));
     return () => window.cancelAnimationFrame(frame);
-  }, [pathname]);
+  }, [pathname, locale]);
 
   function selectLink(event: MouseEvent<HTMLAnchorElement>, section: string) {
     if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
     setOpen(false);
-    if (pathname !== "/") return;
+    if (pathname !== "/" && pathname !== `/${locale}`) return;
 
     // Scroll explicitly after closing the dropdown, including repeated hash clicks.
     event.preventDefault();
@@ -112,7 +112,7 @@ export default function MobileNavigation({ home = false, locale = "en" }: { home
         </div>
         <ul className="max-h-[calc(100dvh-168px)] space-y-1 overflow-y-auto overscroll-contain p-2">
           {items.map(({ label, section, icon }) => {
-            const href = `${home ? "" : "/"}#${section}`;
+            const href = `${home ? "" : `/${locale}`}#${section}`;
             return (
               <li key={section}>
                 <Link
