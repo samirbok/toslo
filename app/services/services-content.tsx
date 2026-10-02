@@ -40,13 +40,7 @@ export default function ServicesContent() {
               <p className="mt-4 leading-7 text-stone-600 dark:text-[#B9C6BD]">{t("Food, groceries, shopping, documents and more — delivered across Agadir.")}</p>
             </div>
 
-            <section aria-labelledby="restaurants-heading" className="services-restaurants mt-12">
-              <h3 id="restaurants-heading" className="text-2xl font-bold tracking-tight text-stone-900 dark:text-[#F2F5F3]">{t("Restaurants")}</h3>
-              <p className="mt-3 leading-7 text-stone-600 dark:text-[#B9C6BD]">{t("Order from your preferred restaurant and let Toslo handle the delivery.")}</p>
-              <div className="mt-6 flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-3">
-                <span className="w-fit rounded-md border border-stone-200 dark:border-[#34483B] bg-white dark:bg-[#1B2822] px-2.5 py-1 text-xs font-semibold text-stone-600 dark:text-[#B9C6BD]">{t("Example listings")}</span>
-                <p className="text-xs leading-5 text-stone-500 dark:text-[#A4B4A9]">{t("Design placeholders only. These are not confirmed Toslo partners.")}</p>
-              </div>
+            <div className="services-restaurants mt-12">
               <div className="mt-5 grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
                 {restaurantListings.map(listing => (
                   <article key={listing.name} className="restaurant-card flex min-w-0 flex-col overflow-hidden rounded-2xl border border-stone-200 dark:border-[#34483B] bg-white dark:bg-[#1B2822] shadow-sm">
@@ -71,7 +65,7 @@ export default function ServicesContent() {
                   </article>
                 ))}
               </div>
-            </section>
+            </div>
 
             <section aria-labelledby="other-services-heading" className="services-more mt-14 border-t border-stone-200 dark:border-[#34483B] pt-10">
               <h3 id="other-services-heading" className="text-2xl font-bold tracking-tight text-stone-900 dark:text-[#F2F5F3]">{t("More ways to deliver")}</h3>
