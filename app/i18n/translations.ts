@@ -126,6 +126,8 @@ const translations: Record<string, [string, string]> = {
 "Order your delivery on WhatsApp in just a few steps and let a local Toslo driver take care of the rest.": ["Commandez votre livraison sur WhatsApp en quelques étapes et laissez un livreur Toslo s’occuper du reste.", "اطلب التوصيل عبر واتساب بخطوات بسيطة ودع أحد مندوبي توسلو يتكفل بالباقي."],
 "Opening your page…": ["Ouverture de votre page…", "جارٍ فتح الصفحة…"],
 "Could not open the page. Please try again.": ["Impossible d’ouvrir la page. Veuillez réessayer.", "تعذر فتح الصفحة. يرجى المحاولة مرة أخرى."],
+"Switch to dark mode": ["Activer le mode sombre", "تفعيل الوضع الداكن"],
+"Switch to light mode": ["Activer le mode clair", "تفعيل الوضع الفاتح"],
 };
 export function translator(locale: Locale) {
   return (text: string) => locale === "en" ? text : translations[text]?.[locale === "fr" ? 0 : 1] ?? text;

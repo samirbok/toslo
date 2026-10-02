@@ -32,11 +32,15 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
+      suppressHydrationWarning
       lang="en"
       dir="ltr"
       data-scroll-behavior="smooth"
       className={`${geistSans.variable} ${geistMono.variable} h-full scroll-smooth motion-reduce:scroll-auto antialiased`}
     >
+      <head>
+        <script id="toslo-theme" dangerouslySetInnerHTML={{ __html: `(function(){var theme;try{theme=localStorage.getItem('toslo-theme')}catch(e){}if(theme!=='dark'&&theme!=='light'){theme=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'}document.documentElement.dataset.theme=theme})()` }} />
+      </head>
       <body className="min-h-full flex flex-col"><BusinessJsonLd /><LanguageVisit>{children}</LanguageVisit></body>
     </html>
   );

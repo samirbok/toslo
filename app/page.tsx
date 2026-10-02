@@ -1,5 +1,8 @@
 "use client";
 
+import ThemeToggle from "./theme-toggle";
+import SiteFooter from "./site-footer";
+
 import BrandLogo from "./brand-logo";
 import { translator } from "./i18n/translations";
 import { useVisitLocale } from "./language-picker";
@@ -18,9 +21,9 @@ const action = "inline-flex min-h-12 items-center justify-center gap-2 rounded-x
 const primary = `${action} bg-[#E5A83B] hover:bg-[#CF922A]`;
 const whatsapp = `${action} bg-[#00875A] hover:bg-[#007D53]`;
 const callUs = `${action} bg-[#E5A83B] hover:bg-[#CF922A]`;
-const secondary = "inline-flex min-h-12 items-center justify-center rounded-xl border border-gray-300 bg-white px-6 py-3 text-sm font-semibold text-[#1A1A1A] transition-colors hover:bg-[#FAFAF8]";
-const eyebrow = "text-xs font-bold uppercase tracking-[0.18em] text-[#007D53]";
-const heading = "mt-4 text-3xl font-bold tracking-tight text-[#111111] sm:text-4xl";
+const secondary = "inline-flex min-h-12 items-center justify-center rounded-xl border border-gray-300 dark:border-[#48624F] bg-white dark:bg-[#1B2822] px-6 py-3 text-sm font-semibold text-[#1A1A1A] dark:text-[#F2F5F3] transition-colors hover:bg-[#FAFAF8] dark:hover:bg-[#101A15]";
+const eyebrow = "text-xs font-bold uppercase tracking-[0.18em] text-[#007D53] dark:text-[#69D5A3]";
+const heading = "mt-4 text-3xl font-bold tracking-tight text-[#111111] dark:text-[#F2F5F3] sm:text-4xl";
 const steps = [
   ["01", "M8 4H5a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2h13a2 2 0 0 0 2-2v-3 M16 3l5 5 M10 14l-1 4 4-1 9-9a2 2 0 0 0-5-5Z", "Tell us what you need", "Send us the pickup details, delivery address and what needs to be delivered."],
   ["02", "m22 2-7 20-4-9-9-4 20-7Z M22 2 11 13", "Place your request", "Send your delivery request quickly through Toslo."],
@@ -28,10 +31,10 @@ const steps = [
   ["04", "M22 11v1a10 10 0 1 1-5.9-9.1 M22 4 12 14l-3-3", "Delivery completed", "Your order reaches the destination you provided."],
 ];
 const stepColors = [
-  { card: "border-[#CFEBDD] bg-[#F0FAF5]", accent: "bg-[#D9F1E4] text-[#006B47]", number: "text-[#006B47]" },
-  { card: "border-[#D8E6F4] bg-[#F2F7FC]", accent: "bg-[#DEEBF8] text-[#315E8A]", number: "text-[#315E8A]" },
-  { card: "border-[#F0DFCF] bg-[#FFF7EF]", accent: "bg-[#FBE6D3] text-[#915329]", number: "text-[#915329]" },
-  { card: "border-[#E5DDF1] bg-[#F7F4FC]", accent: "bg-[#EAE1F6] text-[#6B4D91]", number: "text-[#6B4D91]" },
+  { card: "border-[#CFEBDD] dark:border-[#344D3D] bg-[#F0FAF5] dark:bg-[#1B3025]", accent: "bg-[#D9F1E4] dark:bg-[#294735] text-[#006B47] dark:text-[#69D5A3]", number: "text-[#006B47] dark:text-[#69D5A3]" },
+  { card: "border-[#D8E6F4] dark:border-[#35485A] bg-[#F2F7FC] dark:bg-[#1C2B36]", accent: "bg-[#DEEBF8] dark:bg-[#283E50] text-[#315E8A] dark:text-[#A2C9ED]", number: "text-[#315E8A] dark:text-[#A2C9ED]" },
+  { card: "border-[#F0DFCF] dark:border-[#51412C] bg-[#FFF7EF] dark:bg-[#352B1E]", accent: "bg-[#FBE6D3] dark:bg-[#493722] text-[#915329] dark:text-[#E5BC85]", number: "text-[#915329] dark:text-[#E5BC85]" },
+  { card: "border-[#E5DDF1] dark:border-[#49395B] bg-[#F7F4FC] dark:bg-[#2B2436]", accent: "bg-[#EAE1F6] dark:bg-[#3C2F4D] text-[#6B4D91] dark:text-[#CCB4ED]", number: "text-[#6B4D91] dark:text-[#CCB4ED]" },
 ];
 const zones = ["Agadir", "Hay Salam", "Dakhla", "Founty", "Talborjt", "Bensergao", "Dcheira", "Inezgane", "Ait Melloul", "Anza", "Tamraght", "Taghazout"];
 const pricing = [
@@ -55,32 +58,33 @@ export default function Home() {
   const deliveryWhatsAppUrl = createWhatsAppUrl("I'd like to request a delivery.", locale);
   const businessWhatsAppUrl = createWhatsAppUrl("I'd like to discuss deliveries for my business.", locale);
   return (
-    <div className="min-h-screen bg-[#FAFAF8] text-[#1A1A1A] selection:bg-[#ECFDF5] selection:text-[#111111] [&_a:focus-visible]:outline-2 [&_a:focus-visible]:outline-offset-4 [&_a:focus-visible]:outline-[#00875A]">
-      <a href="#main" className="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:rounded-lg focus:bg-white focus:p-4">{t("Skip to content")}</a>
-      <header className="sticky top-0 z-50 border-b border-gray-200 bg-[#FAFAF8]">
-        <nav aria-label={t("Main navigation")} className={`${container} flex h-20 items-center justify-between gap-2 sm:gap-4`}>
+    <div className="min-h-screen bg-[#FAFAF8] dark:bg-[#101A15] text-[#1A1A1A] dark:text-[#F2F5F3] selection:bg-[#ECFDF5] dark:selection:bg-[#203C2E] selection:text-[#111111] dark:selection:text-[#F2F5F3] [&_a:focus-visible]:outline-2 [&_a:focus-visible]:outline-offset-4 [&_a:focus-visible]:outline-[#00875A]">
+      <a href="#main" className="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:rounded-lg focus:bg-white dark:focus:bg-[#1B2822] focus:p-4">{t("Skip to content")}</a>
+      <header className="sticky top-0 z-50 border-b border-gray-200 dark:border-[#34483B] bg-[#FAFAF8] dark:bg-[#101A15]">
+        <nav dir="ltr" aria-label={t("Main navigation")} className={`${container} flex h-20 items-center justify-between gap-2 sm:gap-4`}>
           <div className="flex items-center gap-2 sm:gap-3">
             <MobileNavigation home locale={locale} />
             <Link href="/" dir="ltr" className="inline-flex shrink-0 items-center max-lg:absolute max-lg:top-0 max-lg:left-1/2 max-lg:-translate-x-1/2"><BrandLogo className="size-20 lg:size-16" /></Link>
           </div>
-          <div className="hidden items-center gap-6 text-sm font-medium text-gray-600 lg:flex">
+          <div className="hidden items-center gap-6 text-sm font-medium text-gray-600 dark:text-[#B9C6BD] lg:flex">
             {[["Services", "services"], ["How it works", "how-it-works"], ["Pricing", "pricing"], ["Zones", "zones"], ["Reviews", "reviews"], ["Contact", "contact"]].map(([label, id]) => (
-              <a key={id} href={id === "services" ? "/services" : `#${id}`} className="transition-colors hover:text-[#007D53]">{t(label)}</a>
+              <a key={id} href={id === "services" ? "/services" : `#${id}`} className="transition-colors hover:text-[#007D53] dark:hover:text-[#69D5A3]">{t(label)}</a>
             ))}
           </div>
+          <ThemeToggle locale={locale} />
         </nav>
       </header>
 
       <main id="main">
-        <section aria-labelledby="hero-heading" className={`${sectionFrame} relative isolate flex items-center overflow-hidden bg-[#FAFAF8]`}>
+        <section aria-labelledby="hero-heading" className={`${sectionFrame} relative isolate flex items-center overflow-hidden bg-[#FAFAF8] dark:bg-[#101A15]`}>
           <div aria-hidden="true" className="absolute -top-36 -right-32 -z-10 size-[520px] rounded-full border-[60px] border-[#00875A]/5" />
           <div className={`${container} grid items-center gap-6 lg:grid-cols-2 lg:gap-16`}>
-            <h1 id="hero-heading" className="order-first mx-auto w-full text-center text-[2.5rem] leading-[1.08] font-bold tracking-tight sm:text-6xl lg:col-span-2 lg:text-6xl"><span className="text-[#00875A]">{t("Your delivery,")}</span><br className="lg:hidden" />{" "}<span className="text-[#E5A83B]">{t("made simple.")}</span></h1>
+            <h1 id="hero-heading" className="order-first mx-auto w-full text-center text-[2.5rem] leading-[1.08] font-bold tracking-tight sm:text-6xl lg:col-span-2 lg:text-6xl"><span className="text-[#00875A] dark:text-[#69D5A3]">{t("Your delivery,")}</span><br className="lg:hidden" />{" "}<span className="text-[#E5A83B]">{t("made simple.")}</span></h1>
             <div className="mx-auto w-full max-w-lg pt-2 text-center lg:mx-0 lg:pt-0 lg:text-start">
-              <p className="text-base leading-7 text-gray-700 sm:text-lg sm:leading-8">{t("Toslo is your local delivery service in Agadir, Taghazout and Tamraght for parcels, food, documents, shopping, local orders and errands.")}</p>
-              <p className="mt-4 text-sm leading-6 text-gray-600 sm:text-base sm:leading-7">{t("Order your delivery on WhatsApp in just a few steps and let a local Toslo driver take care of the rest.")}</p>
+              <p className="text-base leading-7 text-gray-700 dark:text-[#CDD6D0] sm:text-lg sm:leading-8">{t("Toslo is your local delivery service in Agadir, Taghazout and Tamraght for parcels, food, documents, shopping, local orders and errands.")}</p>
+              <p className="mt-4 text-sm leading-6 text-gray-600 dark:text-[#B9C6BD] sm:text-base sm:leading-7">{t("Order your delivery on WhatsApp in just a few steps and let a local Toslo driver take care of the rest.")}</p>
               <div className="mt-8 hidden gap-3 lg:flex"><a href={deliveryWhatsAppUrl} className={whatsapp}>{t("Order on WhatsApp")}</a><a href={deliveryPhoneUrl} className={callUs}>{t("Call us")}</a></div>
-              <Link href="/services" className="mt-5 inline-flex min-h-11 items-center gap-3 text-sm font-semibold text-gray-600 hover:text-[#007D53]">{t("Our services")}</Link>
+              <Link href="/services" className="mt-5 inline-flex min-h-11 items-center gap-3 text-sm font-semibold text-gray-600 dark:text-[#B9C6BD] hover:text-[#007D53] dark:hover:text-[#69D5A3]">{t("Our services")}</Link>
             </div>
             <div className="-order-1 min-w-0 lg:order-last">
               <HeroSlider locale={locale} />
@@ -92,14 +96,14 @@ export default function Home() {
           </div>
         </section>
 
-        <div className="border-y border-gray-200 bg-white">
+        <div className="border-y border-gray-200 dark:border-[#34483B] bg-white dark:bg-[#1B2822]">
           <ul className={`${container} grid grid-cols-2 gap-6 py-8 md:grid-cols-4`}>
-            {[["↗", "Fast delivery"], ["♡", "Local drivers"], ["◎", "Agadir coverage"], ["✓", "Easy ordering"]].map(([icon, label]) => <li key={label} className="flex items-center gap-3 text-sm font-semibold"><span aria-hidden="true" className="flex size-9 shrink-0 items-center justify-center rounded-full bg-[#ECFDF5] text-lg text-[#1A1A1A]">{icon}</span>{t(label)}</li>)}
+            {[["↗", "Fast delivery"], ["♡", "Local drivers"], ["◎", "Agadir coverage"], ["✓", "Easy ordering"]].map(([icon, label]) => <li key={label} className="flex items-center gap-3 text-sm font-semibold"><span aria-hidden="true" className="flex size-9 shrink-0 items-center justify-center rounded-full bg-[#ECFDF5] dark:bg-[#203C2E] text-lg text-[#1A1A1A] dark:text-[#F2F5F3]">{icon}</span>{t(label)}</li>)}
           </ul>
         </div>
 
         <section id="how-it-works" aria-labelledby="how-heading" className={`${container} ${sectionFrame} flex flex-col justify-center`}>
-          <div className="mx-auto max-w-2xl text-center"><p className={eyebrow}>{t("How it works")}</p><h2 id="how-heading" className={heading}>{t("Delivery made simple")}</h2><p className="mt-4 leading-7 text-gray-600">{t("A few details from you. A local driver for the journey. Toslo makes local delivery quick and straightforward.")}</p></div>
+          <div className="mx-auto max-w-2xl text-center"><p className={eyebrow}>{t("How it works")}</p><h2 id="how-heading" className={heading}>{t("Delivery made simple")}</h2><p className="mt-4 leading-7 text-gray-600 dark:text-[#B9C6BD]">{t("A few details from you. A local driver for the journey. Toslo makes local delivery quick and straightforward.")}</p></div>
           <div className="mt-7 grid gap-3 sm:mt-12 sm:grid-cols-2 sm:gap-5 lg:grid-cols-4">
             {steps.map(([number, icon, title, description], index) => (
               <article key={number} className={`grid grid-cols-[2.5rem_minmax(0,1fr)_auto] items-center gap-x-3 rounded-2xl border p-4 shadow-sm shadow-black/[0.025] sm:block sm:p-6 ${stepColors[index].card}`}>
@@ -109,54 +113,54 @@ export default function Home() {
                   </span>
                   <span className={`col-start-3 row-start-1 text-[10px] font-semibold tracking-widest sm:text-xs ${stepColors[index].number}`}>{number}</span>
                 </div>
-                <h3 className="col-start-2 row-start-1 text-sm leading-5 font-semibold text-[#111111] sm:mt-7 sm:text-base sm:leading-6">{t(title)}</h3>
-                <p className="col-span-3 mt-3 text-sm leading-6 text-gray-600">{t(description)}</p>
+                <h3 className="col-start-2 row-start-1 text-sm leading-5 font-semibold text-[#111111] dark:text-[#F2F5F3] sm:mt-7 sm:text-base sm:leading-6">{t(title)}</h3>
+                <p className="col-span-3 mt-3 text-sm leading-6 text-gray-600 dark:text-[#B9C6BD]">{t(description)}</p>
               </article>
             ))}
           </div>
-          <p className="mt-6 rounded-xl border border-[#00875A]/10 bg-white px-6 py-4 text-center text-sm font-medium text-[#007D53]">{t("Simple, local and designed to make delivery easier.")}</p>
+          <p className="mt-6 rounded-xl border border-[#00875A]/10 bg-white dark:bg-[#1B2822] px-6 py-4 text-center text-sm font-medium text-[#007D53] dark:text-[#69D5A3]">{t("Simple, local and designed to make delivery easier.")}</p>
         </section>
 
         <section id="zones" aria-labelledby="zones-heading" className={`${container} ${sectionFrame} grid content-center items-center gap-10 max-sm:gap-6 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16`}>
           <div className="max-sm:mx-auto max-sm:w-full max-sm:max-w-lg max-sm:text-center">
             <p className={eyebrow}>{t("Delivery zones")}</p>
             <h2 id="zones-heading" className={heading}>{t("Across Agadir.")}<br />{t("Closer to you.")}</h2>
-            <p className="mt-5 leading-7 text-gray-600 max-sm:text-pretty">{t("From your neighborhood to nearby towns, Toslo makes local delivery simple.")}</p>
+            <p className="mt-5 leading-7 text-gray-600 dark:text-[#B9C6BD] max-sm:text-pretty">{t("From your neighborhood to nearby towns, Toslo makes local delivery simple.")}</p>
             <a href={createWhatsAppUrl("Can you confirm delivery availability between my pickup and destination?", locale)} className={`${primary} mt-7 max-sm:max-w-full`}><span className="sm:hidden">{t("Check delivery availability")}</span><span className="hidden sm:inline">{t("Confirm delivery on WhatsApp")}</span></a>
-            <p className="mt-3 text-sm leading-6 text-gray-500">{t("Send your pickup and destination to check availability.")}</p>
+            <p className="mt-3 text-sm leading-6 text-gray-500 dark:text-[#A4B4A9]">{t("Send your pickup and destination to check availability.")}</p>
           </div>
           <DeliveryAreas zones={zones} locale={locale} />
         </section>
 
-        <section id="pricing" aria-labelledby="pricing-heading" className={`${sectionFrame} flex items-center justify-center border-y border-gray-100 bg-[#FAFAF8]`}>
+        <section id="pricing" aria-labelledby="pricing-heading" className={`${sectionFrame} flex items-center justify-center border-y border-gray-100 dark:border-[#2D4035] bg-[#FAFAF8] dark:bg-[#101A15]`}>
           <div className={container}>
             <div className="mx-auto max-w-2xl text-center">
               <p className={eyebrow}>{t("Pricing")}</p>
               <h2 id="pricing-heading" className={heading}>{t("Simple delivery pricing")}</h2>
-              <p className="mt-4 leading-7 text-gray-600">{t("Choose the delivery that fits your day. All prices in Moroccan dirhams.")}</p>
+              <p className="mt-4 leading-7 text-gray-600 dark:text-[#B9C6BD]">{t("Choose the delivery that fits your day. All prices in Moroccan dirhams.")}</p>
             </div>
             <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
               {pricing.map(({ title, price, popular, features }) => (
-                <article key={title} className={`relative flex flex-col rounded-2xl border bg-white p-6 shadow-sm shadow-black/5 ${popular ? "border-[#00875A] ring-1 ring-[#00875A]" : "border-gray-200"}`}>
+                <article key={title} className={`relative flex flex-col rounded-2xl border bg-white dark:bg-[#1B2822] p-6 shadow-sm shadow-black/5 ${popular ? "border-[#00875A] ring-1 ring-[#00875A]" : "border-gray-200 dark:border-[#34483B]"}`}>
                   {popular && <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-[#00875A] px-4 py-1 text-xs font-semibold text-white">{t("Popular")}</span>}
-                  <h3 className="text-base font-semibold text-[#111111]">{t(title)}</h3>
-                  <p className="mt-5 text-xs text-gray-500">{t("From")}</p>
-                  <p className="mt-1 flex items-baseline gap-2"><span className="text-4xl font-bold tracking-tight text-[#111111]">{price}</span><span className="text-sm font-semibold text-gray-500">{t("MAD")}</span></p>
+                  <h3 className="text-base font-semibold text-[#111111] dark:text-[#F2F5F3]">{t(title)}</h3>
+                  <p className="mt-5 text-xs text-gray-500 dark:text-[#A4B4A9]">{t("From")}</p>
+                  <p className="mt-1 flex items-baseline gap-2"><span className="text-4xl font-bold tracking-tight text-[#111111] dark:text-[#F2F5F3]">{price}</span><span className="text-sm font-semibold text-gray-500 dark:text-[#A4B4A9]">{t("MAD")}</span></p>
                   <ul className="my-6 space-y-3">
-                    {features.map(feature => <li key={feature} className="flex gap-2 text-sm leading-5 text-gray-600"><span aria-hidden="true" className="text-[#00875A]">✓</span>{t(feature)}</li>)}
+                    {features.map(feature => <li key={feature} className="flex gap-2 text-sm leading-5 text-gray-600 dark:text-[#B9C6BD]"><span aria-hidden="true" className="text-[#00875A] dark:text-[#69D5A3]">✓</span>{t(feature)}</li>)}
                   </ul>
                   <a href={createWhatsAppUrl(t("I’m interested in {service}. I’d like to order.").replace("{service}", t(title)), locale)} aria-label={t("Order {service} on WhatsApp").replace("{service}", t(title))} className={`${popular ? whatsapp : primary} mt-auto w-full`}>{t("Order delivery")}</a>
                 </article>
               ))}
             </div>
             <div className="mt-7 grid gap-4 sm:grid-cols-2">
-              <div className="flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-gray-200 bg-white p-5">
-                <div><h3 className="text-sm font-semibold text-[#111111]">{t("By distance")}</h3><p className="mt-2 text-sm text-gray-600">{t("From")} <span className="font-semibold text-[#007D53]">{t("25 MAD")}</span> {t("· +5 MAD per additional km")}</p></div>
-                <a href={createWhatsAppUrl("I’d like a distance-based delivery quote.", locale)} className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-[#007D53]">{t("Get a quote")}</a>
+              <div className="flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-gray-200 dark:border-[#34483B] bg-white dark:bg-[#1B2822] p-5">
+                <div><h3 className="text-sm font-semibold text-[#111111] dark:text-[#F2F5F3]">{t("By distance")}</h3><p className="mt-2 text-sm text-gray-600 dark:text-[#B9C6BD]">{t("From")} <span className="font-semibold text-[#007D53] dark:text-[#69D5A3]">{t("25 MAD")}</span> {t("· +5 MAD per additional km")}</p></div>
+                <a href={createWhatsAppUrl("I’d like a distance-based delivery quote.", locale)} className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-[#007D53] dark:text-[#69D5A3]">{t("Get a quote")}</a>
               </div>
-              <div className="flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-gray-200 bg-white p-5">
-                <div><h3 className="text-sm font-semibold text-[#111111]">{t("Business delivery")}</h3><p className="mt-2 text-sm text-gray-600">{t("A tailored service, priced on request.")}</p></div>
-                <a href={businessWhatsAppUrl} className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-[#007D53]">{t("Let’s talk")}</a>
+              <div className="flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-gray-200 dark:border-[#34483B] bg-white dark:bg-[#1B2822] p-5">
+                <div><h3 className="text-sm font-semibold text-[#111111] dark:text-[#F2F5F3]">{t("Business delivery")}</h3><p className="mt-2 text-sm text-gray-600 dark:text-[#B9C6BD]">{t("A tailored service, priced on request.")}</p></div>
+                <a href={businessWhatsAppUrl} className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-[#007D53] dark:text-[#69D5A3]">{t("Let’s talk")}</a>
               </div>
             </div>
           </div>
@@ -166,41 +170,41 @@ export default function Home() {
           <div className="grid items-center gap-12 max-sm:gap-6 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
             <div className="max-sm:text-center">
               <p className={eyebrow}>{t("For local businesses")}</p>
-              <h2 id="business-heading" className={heading}>{t("You run your business.")}<br />{t("We deliver")}<span className="text-[#00875A]">.</span></h2>
-              <p className="mt-5 max-w-md leading-7 text-gray-600 max-sm:mx-auto max-sm:text-pretty">{t("Keep your focus on your customers. Toslo handles local pickups and deliveries across Agadir.")}</p>
+              <h2 id="business-heading" className={heading}>{t("You run your business.")}<br />{t("We deliver")}<span className="text-[#00875A] dark:text-[#69D5A3]">.</span></h2>
+              <p className="mt-5 max-w-md leading-7 text-gray-600 dark:text-[#B9C6BD] max-sm:mx-auto max-sm:text-pretty">{t("Keep your focus on your customers. Toslo handles local pickups and deliveries across Agadir.")}</p>
               <a href={businessWhatsAppUrl} className={`${primary} mt-7`}>{t("Let’s talk delivery")}</a>
-              <p className="mt-3 text-xs leading-5 text-gray-500">{t("Tell us about your business on WhatsApp.")}</p>
+              <p className="mt-3 text-xs leading-5 text-gray-500 dark:text-[#A4B4A9]">{t("Tell us about your business on WhatsApp.")}</p>
             </div>
-            <div className="overflow-hidden rounded-3xl border border-gray-200/80 bg-white px-6 shadow-sm shadow-black/[0.025] max-sm:px-4 sm:px-8">
-              <ol className="divide-y divide-gray-100">
+            <div className="overflow-hidden rounded-3xl border border-gray-200/80 dark:border-[#34483B]/80 bg-white dark:bg-[#1B2822] px-6 shadow-sm shadow-black/[0.025] max-sm:px-4 sm:px-8">
+              <ol className="divide-y divide-gray-100 dark:divide-[#2D4035]">
                 {[
                   ["01", "Your orders, ready to go", "Prepare your orders and share the pickup and delivery details."],
                   ["02", "We take it from here", "A local Toslo driver collects from your shop."],
                   ["03", "Straight to your customer", "We handle the journey to their doorstep."],
                 ].map(([number, title, description]) => (
                   <li key={number} className="flex gap-5 py-7 max-sm:gap-3 max-sm:py-4 sm:py-8">
-                    <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-[#ECFDF5] text-xs font-semibold text-[#007D53]">{number}</span>
+                    <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-[#ECFDF5] dark:bg-[#203C2E] text-xs font-semibold text-[#007D53] dark:text-[#69D5A3]">{number}</span>
                     <div>
-                      <h3 className="pt-1 text-base font-semibold text-[#111111]">{t(title)}</h3>
-                      <p className="mt-2 max-w-sm text-sm leading-6 text-gray-600">{t(description)}</p>
+                      <h3 className="pt-1 text-base font-semibold text-[#111111] dark:text-[#F2F5F3]">{t(title)}</h3>
+                      <p className="mt-2 max-w-sm text-sm leading-6 text-gray-600 dark:text-[#B9C6BD]">{t(description)}</p>
                     </div>
                   </li>
                 ))}
               </ol>
             </div>
           </div>
-          <div className="mt-12 flex flex-col gap-4 border-t border-gray-200 pt-6 sm:flex-row sm:items-center sm:gap-8">
-            <p className="shrink-0 text-xs font-semibold text-gray-500">{t("Made for local business")}</p>
+          <div className="mt-12 flex flex-col gap-4 border-t border-gray-200 dark:border-[#34483B] pt-6 sm:flex-row sm:items-center sm:gap-8">
+            <p className="shrink-0 text-xs font-semibold text-gray-500 dark:text-[#A4B4A9]">{t("Made for local business")}</p>
             <ul className="flex flex-wrap gap-x-6 gap-y-3">
               {["Restaurants", "Instagram sellers", "Shops", "E-commerce", "Local businesses"].map(label => (
-                <li key={label} className="flex items-center gap-2 text-xs font-medium text-gray-600"><span aria-hidden="true" className="size-1 rounded-full bg-[#00875A]/60" />{t(label)}</li>
+                <li key={label} className="flex items-center gap-2 text-xs font-medium text-gray-600 dark:text-[#B9C6BD]"><span aria-hidden="true" className="size-1 rounded-full bg-[#00875A]/60" />{t(label)}</li>
               ))}
             </ul>
           </div>
         </section>
 
-        <section id="reviews" aria-labelledby="reviews-heading" className={`${sectionFrame} flex items-center justify-center bg-[#FAFAF8]`}>
-          <div className={container}><div className="mx-auto max-w-2xl text-center"><p className={eyebrow}>{t("Customer reviews")}</p><h2 id="reviews-heading" className={heading}>{t("What our customers say")}</h2><p className="mt-4 leading-7 text-gray-600">{t("See what customers think about their Toslo delivery experience.")}</p></div>
+        <section id="reviews" aria-labelledby="reviews-heading" className={`${sectionFrame} flex items-center justify-center bg-[#FAFAF8] dark:bg-[#101A15]`}>
+          <div className={container}><div className="mx-auto max-w-2xl text-center"><p className={eyebrow}>{t("Customer reviews")}</p><h2 id="reviews-heading" className={heading}>{t("What our customers say")}</h2><p className="mt-4 leading-7 text-gray-600 dark:text-[#B9C6BD]">{t("See what customers think about their Toslo delivery experience.")}</p></div>
             <div className="mt-8 min-h-80 w-full [&_a[href*='elfsight.com']]:hidden!">
               <div
                 className="elfsight-app-6365c76a-bfbd-46e1-b404-5cb7e6177859"
@@ -214,19 +218,15 @@ export default function Home() {
         </section>
 
         <section id="faq" aria-labelledby="faq-heading" className={`${container} ${sectionFrame} grid content-center items-center gap-10 max-sm:gap-6 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20`}>
-          <div className="max-sm:text-center"><p className={eyebrow}>{t("FAQ")}</p><h2 id="faq-heading" className={heading}>{t("Frequently")}<br />{t("asked questions")}</h2><p className="mt-5 leading-7 text-gray-600">{t("A few things to know before your next delivery.")}</p><a href="#contact" className="mt-5 inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-[#007D53]">{t("Still have a question?")}</a></div>
-          <div className="divide-y divide-gray-200 border-y border-gray-200">{faqs.map(([question, answer]) => <details key={question} className="group py-1"><summary className="flex min-h-16 cursor-pointer list-none items-center justify-between gap-5 py-4 text-sm font-semibold focus-visible:outline-2 focus-visible:outline-[#00875A] [&::-webkit-details-marker]:hidden">{t(question)}<span aria-hidden="true" className="text-xl font-normal text-[#007D53] group-open:rotate-45">+</span></summary><p className="pb-5 pe-7 text-sm leading-7 text-gray-600">{t(answer)}</p></details>)}</div>
+          <div className="max-sm:text-center"><p className={eyebrow}>{t("FAQ")}</p><h2 id="faq-heading" className={heading}>{t("Frequently")}<br />{t("asked questions")}</h2><p className="mt-5 leading-7 text-gray-600 dark:text-[#B9C6BD]">{t("A few things to know before your next delivery.")}</p><a href="#contact" className="mt-5 inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-[#007D53] dark:text-[#69D5A3]">{t("Still have a question?")}</a></div>
+          <div className="divide-y divide-gray-200 dark:divide-[#34483B] border-y border-gray-200 dark:border-[#34483B]">{faqs.map(([question, answer]) => <details key={question} className="group py-1"><summary className="flex min-h-16 cursor-pointer list-none items-center justify-between gap-5 py-4 text-sm font-semibold focus-visible:outline-2 focus-visible:outline-[#00875A] [&::-webkit-details-marker]:hidden">{t(question)}<span aria-hidden="true" className="text-xl font-normal text-[#007D53] dark:text-[#69D5A3] group-open:rotate-45">+</span></summary><p className="pb-5 pe-7 text-sm leading-7 text-gray-600 dark:text-[#B9C6BD]">{t(answer)}</p></details>)}</div>
         </section>
 
 
         <ContactSection locale={locale} />
       </main>
 
-      <footer className="bg-[#FAFAF8] pt-16 pb-28 max-sm:pt-10 max-sm:pb-20">
-        <div className={container}><div className="grid gap-10 max-sm:grid-cols-2 max-sm:gap-x-5 max-sm:gap-y-6 sm:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr_1fr]"><div className="max-sm:col-span-2 max-sm:text-center"><Link href="/" className="inline-flex"><BrandLogo className="size-24" /></Link><p className="mt-4 max-w-xs text-sm leading-7 text-gray-600 max-sm:mx-auto max-sm:mt-2">{t("Local delivery made simple in Agadir.")}</p></div>
-          {[{ title: "Company", links: [["Contact", "#contact"], ["Reviews", "#reviews"]] }, { title: "Services", links: [["Food delivery", "/services"], ["Parcels", "/services"], ["Documents", "/services"], ["Business delivery", "#business"]] }, { title: "Useful links", links: [["Delivery zones", "#zones"], ["Pricing", "#pricing"], ["Become a driver", "#"]] }].map(column => <div key={column.title} className={column.title === "Services" ? "max-sm:col-start-2 max-sm:row-start-2 max-sm:row-span-2" : column.title === "Company" ? "max-sm:col-start-1 max-sm:row-start-2" : "max-sm:col-start-1 max-sm:row-start-3"}><h2 className="text-sm font-semibold">{t(column.title)}</h2><ul className="mt-4 space-y-1 max-sm:mt-2 max-sm:space-y-0">{column.links.map(([label, href]) => <li key={label}><Link href={href} className="inline-flex min-h-11 items-center text-sm text-gray-600 hover:text-[#007D53]">{t(label)}</Link></li>)}</ul></div>)}
-        </div><div className="mt-12 border-t border-gray-200 pt-6 text-xs text-gray-600 max-sm:mt-8 max-sm:text-center">{t("© Toslo Delivery")}</div></div>
-      </footer>
+      <SiteFooter locale={locale} />
       <FloatingWhatsApp locale={locale} />
     </div>
   );

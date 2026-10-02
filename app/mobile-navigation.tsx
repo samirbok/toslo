@@ -68,6 +68,7 @@ export default function MobileNavigation({ home = false, locale = "en" }: { home
 
   return (
     <div
+      dir={locale === "ar" ? "rtl" : "ltr"}
       ref={menuRef}
       className="lg:hidden"
       onKeyDown={event => {
@@ -90,7 +91,7 @@ export default function MobileNavigation({ home = false, locale = "en" }: { home
         aria-expanded={open}
         aria-controls={menuId}
         onClick={() => setOpen(current => !current)}
-        className={`flex size-11 cursor-pointer items-center justify-center rounded-2xl border transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#00875A] motion-reduce:transition-none ${open ? "border-[#00875A]/20 bg-[#ECFDF5] text-[#007D53]" : "border-[#00875A]/10 bg-white text-[#007D53] shadow-sm hover:bg-[#ECFDF5]"}`}
+        className={`flex size-11 cursor-pointer items-center justify-center rounded-2xl border transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#00875A] motion-reduce:transition-none ${open ? "border-[#00875A]/20 bg-[#ECFDF5] dark:bg-[#203C2E] text-[#007D53] dark:text-[#69D5A3]" : "border-[#00875A]/10 bg-white dark:bg-[#1B2822] text-[#007D53] dark:text-[#69D5A3] shadow-sm hover:bg-[#ECFDF5] dark:hover:bg-[#203C2E]"}`}
       >
         <span aria-hidden="true" className="relative block h-4 w-5">
           <span className={`absolute start-0 top-0 h-0.5 w-5 rounded-full bg-current transition-transform duration-200 motion-reduce:transition-none ${open ? "translate-y-[7px] rotate-45" : ""}`} />
@@ -103,10 +104,10 @@ export default function MobileNavigation({ home = false, locale = "en" }: { home
         id={menuId}
         aria-hidden={!open}
         inert={!open}
-        className={`absolute inset-x-4 top-[calc(100%+8px)] origin-top overflow-hidden rounded-3xl border border-[#00875A]/10 bg-white shadow-[0_16px_48px_-12px_rgba(0,65,43,0.22)] transition-[opacity,transform,visibility] duration-200 motion-reduce:transition-none sm:inset-x-auto sm:start-6 sm:w-80 ${open ? "visible translate-y-0 opacity-100" : "invisible -translate-y-2 opacity-0"}`}
+        className={`absolute inset-x-4 top-[calc(100%+8px)] origin-top overflow-hidden rounded-3xl border border-[#00875A]/10 bg-white dark:bg-[#1B2822] shadow-[0_16px_48px_-12px_rgba(0,65,43,0.22)] transition-[opacity,transform,visibility] duration-200 motion-reduce:transition-none sm:inset-x-auto sm:start-6 sm:w-80 ${open ? "visible translate-y-0 opacity-100" : "invisible -translate-y-2 opacity-0"}`}
       >
-        <div className="flex items-center justify-between border-b border-[#00875A]/[0.07] bg-[#FAFAF8] px-5 py-4">
-          <span className="text-xs font-semibold text-[#5B6472]">{t("Navigation menu")}</span>
+        <div className="flex items-center justify-between border-b border-[#00875A]/[0.07] bg-[#FAFAF8] dark:bg-[#101A15] px-5 py-4">
+          <span className="text-xs font-semibold text-[#5B6472] dark:text-[#B9C6BD]">{t("Navigation menu")}</span>
           <span aria-hidden="true" className="h-1 w-7 rounded-full bg-[#E5A83B]" />
         </div>
         <ul className="max-h-[calc(100dvh-168px)] space-y-1 overflow-y-auto overscroll-contain p-2">
@@ -119,9 +120,9 @@ export default function MobileNavigation({ home = false, locale = "en" }: { home
                   href={href}
                   aria-current={active ? "page" : undefined}
                   onClick={event => selectLink(event, section)}
-                  className={`group flex min-h-12 items-center gap-3 rounded-2xl px-3 py-2 text-sm font-semibold transition-colors duration-150 hover:bg-[#ECFDF5] hover:text-[#007D53] focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-[#00875A] motion-reduce:transition-none ${active ? "bg-[#ECFDF5] text-[#007D53]" : "text-[#171717]"}`}
+                  className={`group flex min-h-12 items-center gap-3 rounded-2xl px-3 py-2 text-sm font-semibold transition-colors duration-150 hover:bg-[#ECFDF5] dark:hover:bg-[#203C2E] hover:text-[#007D53] dark:hover:text-[#69D5A3] focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-[#00875A] motion-reduce:transition-none ${active ? "bg-[#ECFDF5] dark:bg-[#203C2E] text-[#007D53] dark:text-[#69D5A3]" : "text-[#171717] dark:text-[#F2F5F3]"}`}
                 >
-                  <span className="flex size-9 shrink-0 items-center justify-center rounded-xl bg-[#00875A]/[0.06] text-[#007D53]">
+                  <span className="flex size-9 shrink-0 items-center justify-center rounded-xl bg-[#00875A]/[0.06] text-[#007D53] dark:text-[#69D5A3]">
                     <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" className="size-[18px]"><path d={icon} /></svg>
                   </span>
                   {t(label)}

@@ -50,9 +50,9 @@ export default function LanguagePicker({ locale, destination = "/" }: { locale?:
   return (
     <div>
       <fieldset className="flex flex-wrap items-center justify-center gap-2" dir="ltr">
-        <legend className={locale ? "mb-3 w-full text-center text-sm text-gray-600" : "sr-only"}>{t("Change language")}</legend>
+        <legend className={locale ? "mb-3 w-full text-center text-sm text-gray-600 dark:text-[#B9C6BD]" : "sr-only"}>{t("Change language")}</legend>
         {(Object.keys(languageNames) as Locale[]).map(language => (
-          <button key={language} type="button" onClick={() => selectLanguage(language)} lang={language} aria-label={languageNames[language]} aria-pressed={selected === language} className={`flex min-h-24 min-w-16 cursor-pointer flex-col items-center justify-center gap-3 rounded-2xl border px-3 py-4 text-xs font-semibold shadow-sm transition-[background-color,border-color,box-shadow,transform] duration-200 active:scale-95 active:border-[#00875A] active:bg-[#ECFDF5] motion-reduce:transform-none motion-reduce:transition-none focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#00875A] sm:px-5 ${selected === language ? "border-[#00875A] bg-[#ECFDF5] text-[#007D53] ring-1 ring-[#00875A]/20" : "border-gray-200 bg-white text-gray-600 hover:border-[#00875A]/50 hover:bg-[#ECFDF5] hover:text-[#007D53] hover:shadow-md"}`}>
+          <button key={language} type="button" onClick={() => selectLanguage(language)} lang={language} aria-label={languageNames[language]} aria-pressed={selected === language} className={`flex min-h-24 min-w-16 cursor-pointer flex-col items-center justify-center gap-3 rounded-2xl border px-3 py-4 text-xs font-semibold shadow-sm transition-[background-color,border-color,box-shadow,transform] duration-200 active:scale-95 active:border-[#00875A] active:bg-[#ECFDF5] dark:active:bg-[#203C2E] motion-reduce:transform-none motion-reduce:transition-none focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#00875A] sm:px-5 ${selected === language ? "border-[#00875A] bg-[#ECFDF5] dark:bg-[#203C2E] text-[#007D53] dark:text-[#69D5A3] ring-1 ring-[#00875A]/20" : "border-gray-200 dark:border-[#34483B] bg-white dark:bg-[#1B2822] text-gray-600 dark:text-[#B9C6BD] hover:border-[#00875A]/50 hover:bg-[#ECFDF5] dark:hover:bg-[#203C2E] hover:text-[#007D53] dark:hover:text-[#69D5A3] hover:shadow-md"}`}>
             <span aria-hidden="true" className="text-4xl leading-none">{languageFlags[language]}</span>
             <span>{languageNames[language]}</span>
           </button>
@@ -89,12 +89,12 @@ export function LanguageWelcome({ destination = "/" }: { destination?: string })
   }, []);
 
   return (
-    <main className="flex min-h-dvh items-center justify-center bg-[#FAFAF8] px-6 pt-8 pb-24 sm:pb-32" dir="ltr">
-      <section aria-labelledby="language-heading" className="w-full max-w-lg rounded-3xl border border-gray-200 bg-white px-6 py-8 text-center shadow-sm sm:p-10">
+    <main className="flex min-h-dvh items-center justify-center bg-[#FAFAF8] dark:bg-[#101A15] px-6 pt-8 pb-24 sm:pb-32" dir="ltr">
+      <section aria-labelledby="language-heading" className="w-full max-w-lg rounded-3xl border border-gray-200 dark:border-[#34483B] bg-white dark:bg-[#1B2822] px-6 py-8 text-center shadow-sm sm:p-10">
         <div ref={logoRef}><BrandLogo className="mx-auto size-32 sm:size-36" /></div>
-        <h1 id="language-heading" className="mt-8 text-2xl font-bold text-[#111111]">Choose your preferred language</h1>
-        <p lang="fr" className="mt-3 text-gray-600">Choisissez votre langue</p>
-        <p lang="ar" dir="rtl" className="mt-3 text-xl leading-8 text-gray-600">اختر لغتك</p>
+        <h1 id="language-heading" className="mt-8 text-2xl font-bold text-[#111111] dark:text-[#F2F5F3]">Choose your preferred language</h1>
+        <p lang="fr" className="mt-3 text-gray-600 dark:text-[#B9C6BD]">Choisissez votre langue</p>
+        <p lang="ar" dir="rtl" className="mt-3 text-xl leading-8 text-gray-600 dark:text-[#B9C6BD]">اختر لغتك</p>
         <div className="mt-8"><LanguagePicker destination={destination} /></div>
       </section>
     </main>
