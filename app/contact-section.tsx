@@ -43,7 +43,7 @@ export default function ContactSection({ locale = "en" }: { locale?: Locale }) {
               <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" className="size-5"><rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" /></svg>
               {t("Instagram")}<span className="sr-only"> {t("(opens in a new tab)")}</span>
             </a>
-            <a href={tiktokUrl} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center gap-2 rounded-full border border-[#111111] bg-[#111111] px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#1A1A1A]">
+            <a href={tiktokUrl} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center gap-2 rounded-full border border-[#E5A83B] bg-[#E5A83B] px-4 py-2 text-sm font-semibold text-white transition-colors hover:border-[#CF922A] hover:bg-[#CF922A]">
               <svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" className="size-5"><path d="M16.7 2h-3.4v13.4a3 3 0 1 1-2.6-3V9a6.4 6.4 0 1 0 6 6.4V8.6a8.4 8.4 0 0 0 5 1.6V6.8a5 5 0 0 1-5-4.8Z" /></svg>
               {t("TikTok")}<span className="sr-only"> {t("(opens in a new tab)")}</span>
             </a>

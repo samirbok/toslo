@@ -15,7 +15,7 @@ import FloatingWhatsApp from "./floating-whatsapp";
 const container = "mx-auto w-full max-w-[1200px] px-6";
 const sectionFrame = "min-h-[calc(100dvh-81px)] scroll-mt-[81px] py-10 lg:py-12";
 const action = "inline-flex min-h-12 items-center justify-center gap-2 rounded-xl px-6 py-3 text-sm font-semibold text-white shadow-sm transition-colors";
-const primary = `${action} bg-[#111111] hover:bg-[#00875A]`;
+const primary = `${action} bg-[#E5A83B] hover:bg-[#CF922A]`;
 const whatsapp = `${action} bg-[#00875A] hover:bg-[#007D53]`;
 const callUs = `${action} bg-[#E5A83B] hover:bg-[#CF922A]`;
 const secondary = "inline-flex min-h-12 items-center justify-center rounded-xl border border-gray-300 bg-white px-6 py-3 text-sm font-semibold text-[#1A1A1A] transition-colors hover:bg-[#FAFAF8]";
