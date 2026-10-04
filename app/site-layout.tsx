@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import Script from "next/script";
+import { GoogleAnalytics } from "@next/third-parties/google";
 import "./globals.css";
 import { siteUrl } from "./seo";
 import BusinessJsonLd from "./business-json-ld";
@@ -41,19 +41,7 @@ export default function SiteLayout({ children, locale }: { children: React.React
       <body className="min-h-full flex flex-col">
         {locale && <BusinessJsonLd locale={locale} />}
         <LanguageVisit initialLocale={locale}>{children}</LanguageVisit>
-        <Script
-          id="google-analytics-tag"
-          src="https://www.googletagmanager.com/gtag/js?id=G-820BPZEDNC"
-          strategy="afterInteractive"
-        />
-        <Script id="google-analytics-init" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-820BPZEDNC');
-          `}
-        </Script>
+        <GoogleAnalytics gaId="G-820BPZEDNC" />
       </body>
     </html>
   );
