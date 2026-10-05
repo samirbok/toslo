@@ -133,7 +133,7 @@ export function LanguageWelcome({ destination = "/" }: { destination?: string })
     <main className="flex min-h-dvh items-center justify-center bg-[#FAFAF8] dark:bg-[#101A15] px-6 pt-8 pb-24 sm:pb-32" dir="ltr">
       <section aria-labelledby="language-heading" className="w-full max-w-lg rounded-3xl border border-gray-200 dark:border-[#34483B] bg-white dark:bg-[#1B2822] px-6 py-8 text-center shadow-sm sm:p-10">
         <div ref={logoRef}><BrandLogo className="mx-auto size-32 sm:size-36" /></div>
-        <h1 id="language-heading" className="mt-8 text-2xl font-bold text-[#111111] dark:text-[#F2F5F3]">Choose your preferred language</h1>
+        <h1 id="language-heading" className="mt-8 text-2xl font-bold text-[#111111] dark:text-[#F2F5F3]">Toslo delivery in Agadir</h1>
         <p lang="fr" className="mt-3 text-gray-600 dark:text-[#B9C6BD]">Choisissez votre langue</p>
         <p lang="ar" dir="rtl" className="mt-3 text-xl leading-8 text-gray-600 dark:text-[#B9C6BD]">اختر لغتك</p>
         <div className="mt-8"><LanguagePicker destination={destination} /></div>

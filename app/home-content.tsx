@@ -45,7 +45,7 @@ const pricing = [
   { title: "Outlying areas", price: 50, popular: false, features: ["Delivery in 30–40 min", "Surrounding areas", "5–10 km", "Reliable service"] },
 ];
 const faqs = [
-  ["Where does Toslo deliver?", "Toslo focuses on Agadir and nearby areas. Share your pickup and destination so we can confirm availability for your route."],
+  ["Where does Toslo deliver?", "Toslo serves Agadir, Inzegane, Ait Melloul, Aourir, Tamraght and Taghazout. Share your pickup and destination so we can confirm availability for your route."],
   ["How much does delivery cost?", "Standard delivery starts at 25 MAD, express and night delivery at 30 MAD, and outlying areas at 50 MAD. Distance-based pricing starts at 25 MAD with 5 MAD per additional kilometre. Business deliveries are quoted individually. Contact Toslo to confirm your route and price."],
   ["How do I request a delivery?", "Send Toslo the pickup address, destination and a description of what needs delivering. The team can confirm the next steps."],
   ["Can I schedule a delivery?", "Share your preferred date and time with Toslo. Scheduling is subject to confirmation and driver availability."],
@@ -80,7 +80,7 @@ export default function Home() {
         <section aria-labelledby="hero-heading" className={`${sectionFrame} relative isolate flex items-center overflow-hidden bg-[#FAFAF8] dark:bg-[#101A15]`}>
           <div aria-hidden="true" className="absolute -top-36 -right-32 -z-10 size-[520px] rounded-full border-[60px] border-[#00875A]/5" />
           <div className={`${container} grid items-center gap-6 lg:grid-cols-2 lg:grid-rows-[auto_1fr_auto] lg:gap-x-16 lg:gap-y-8`}>
-            <h1 id="hero-heading" className="order-first mx-auto w-full text-center text-5xl leading-[1.08] font-bold tracking-tight sm:text-7xl lg:col-start-1 lg:row-start-1 lg:self-start lg:pt-4 lg:text-start lg:text-7xl lg:leading-[1.08]"><span className="text-[#00875A] dark:text-[#69D5A3] lg:whitespace-nowrap">{t("Stay In.")}</span><br />{" "}<span className="text-[#E5A83B] lg:whitespace-nowrap">{t("We Deliver.")}</span></h1>
+            <h1 id="hero-heading" className="order-first mx-auto w-full text-center text-5xl leading-[1.08] font-bold tracking-tight sm:text-7xl lg:col-start-1 lg:row-start-1 lg:self-start lg:pt-4 lg:text-start lg:text-7xl lg:leading-[1.08]"><span className="text-[#00875A] dark:text-[#69D5A3] lg:whitespace-nowrap">{t("Fast delivery")}</span><br />{" "}<span className="text-[#E5A83B] lg:whitespace-nowrap">{t("in Agadir")}</span></h1>
             <div className="mx-auto w-full max-w-lg pt-2 text-center lg:col-start-1 lg:row-start-2 lg:mx-0 lg:pt-0 lg:text-start">
               <p className="text-base leading-7 text-gray-700 dark:text-[#CDD6D0] sm:text-lg sm:leading-8 lg:font-medium">{t("Toslo is your local delivery service in Agadir, Taghazout and Tamraght for parcels, food, documents, shopping, local orders and errands.")}</p>
               <p className="mt-4 text-sm leading-6 text-gray-600 dark:text-[#B9C6BD] sm:text-base sm:leading-7 lg:font-medium">{t("Order your delivery on WhatsApp in just a few steps and let a local Toslo driver take care of the rest.")}</p>

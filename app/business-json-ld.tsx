@@ -2,7 +2,7 @@ import { deliveryPhoneUrl, instagramUrl, tiktokUrl } from "./contact-links";
 import { localizedSeo, siteUrl } from "./seo";
 import type { Locale } from "./i18n/translations";
 
-const areaServed = ["Agadir", "Taghazout", "Tamraght"];
+const areaServed = ["Agadir", "Inzegane", "Ait Melloul", "Aourir", "Tamraght", "Taghazout"];
 const businessId = `${siteUrl}/#business`;
 
 // Facts from the existing contact section, delivery zones, and service copy.

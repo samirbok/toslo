@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import type { Locale } from "./i18n/translations";
 
-export const siteUrl = "https://www.delivery-agadir.com";
-export const homeDescription = "Livraison de repas, colis et courses à Agadir. Commandez simplement sur WhatsApp avec Toslo.";
+export const siteUrl = "https://delivery-agadir.com";
+export const homeDescription = "Toslo, service de livraison rapide à Agadir. Livraison de repas, colis, courses et commandes à Agadir et alentours.";
 
 const sharingImage = {
   url: `${siteUrl}/images/img3.png`,
@@ -46,12 +46,12 @@ export const localizedSeo: Record<Locale, { title: string; description: string; 
     serviceType: "توصيل الطرود والطعام والوثائق والمشتريات والطلبات المحلية",
   },
   fr: {
-    title: "Toslo – Livraison à Agadir",
+    title: "Toslo | Livreur & Service de Livraison à Agadir",
     description: homeDescription,
     serviceType: "Livraison de colis, repas, documents, courses et commandes locales",
   },
   en: {
-    title: "Toslo – Delivery in Agadir",
+    title: "Toslo | Fast Local Delivery in Agadir",
     description: "Toslo delivers food, parcels, documents and shopping in Agadir, Taghazout and Tamraght. Local drivers for personal and business orders. Request via WhatsApp.",
     serviceType: "Delivery of parcels, food, documents, shopping and local orders",
   },

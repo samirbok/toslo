@@ -39,7 +39,7 @@ export default function SiteLayout({ children, locale }: { children: React.React
         <script id="toslo-theme" dangerouslySetInnerHTML={{ __html: `(function(){var theme;try{theme=localStorage.getItem('toslo-theme')}catch(e){}if(theme!=='dark'&&theme!=='light'){theme=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'}document.documentElement.dataset.theme=theme})()` }} />
       </head>
       <body className="min-h-full flex flex-col">
-        {locale && <BusinessJsonLd locale={locale} />}
+        <BusinessJsonLd locale={locale ?? "fr"} />
         <LanguageVisit initialLocale={locale}>{children}</LanguageVisit>
         <GoogleAnalytics gaId="G-820BPZEDNC" />
       </body>
