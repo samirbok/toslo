@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import type { Locale } from "./i18n/translations";
 
-export const siteUrl = "https://delivery-agadir.com";
+export const siteUrl = "https://www.delivery-agadir.com";
 export const homeDescription = "Toslo, service de livraison rapide à Agadir. Livraison de repas, colis, courses et commandes à Agadir et alentours.";
 
 const sharingImage = {
