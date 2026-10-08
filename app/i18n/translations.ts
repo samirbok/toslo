@@ -28,6 +28,7 @@ const translations: Record<string, [string, string]> = {
 "Toslo makes it easy to send parcels, food, documents, shopping and local orders across Agadir.": ["Avec Toslo, envoyez facilement vos colis, repas, documents, courses et commandes locales partout à Agadir.", "مع توسلو، أرسل الطرود والوجبات والوثائق والمشتريات والطلبات المحلية بسهولة في جميع أنحاء أكادير."],
 "Request your delivery in just a few steps and let a local Toslo driver take care of the rest.": ["Demandez votre livraison en quelques étapes et laissez un livreur Toslo s’occuper du reste.", "اطلب التوصيل بخطوات بسيطة ودع أحد مندوبي توسلو يتكفل بالباقي."],
 "Order on WhatsApp": ["Commander sur WhatsApp", "اطلب عبر واتساب"],
+"To help us arrange your delivery, include the pickup address, destination, item and preferred time in your WhatsApp message.": ["Pour organiser votre livraison, indiquez dans votre message WhatsApp le lieu de retrait, la destination, l’article et l’heure souhaitée.", "لتسهيل ترتيب التوصيل، أضف إلى رسالتك عبر واتساب عنوان الاستلام والوجهة والغرض والوقت المناسب."],
 "Call us": ["Appelez-nous", "اتصل بنا"],
 "Our services": ["Nos services", "خدماتنا"],
 "Fast delivery": ["Livraison rapide", "توصيل سريع"],

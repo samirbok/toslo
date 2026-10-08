@@ -15,6 +15,7 @@ import HeroSlider from "./hero-slider";
 import ContactSection from "./contact-section";
 import DeliveryAreas from "./delivery-areas";
 import FloatingWhatsApp from "./floating-whatsapp";
+import OrderWhatsAppButton from "./order-whatsapp-button";
 
 const container = "mx-auto w-full max-w-[1200px] px-6";
 const sectionFrame = "min-h-[calc(100dvh-81px)] scroll-mt-[81px] py-10 lg:py-12";
@@ -56,7 +57,6 @@ const faqs = [
 export default function Home() {
   const locale = useVisitLocale();
   const t = translator(locale);
-  const deliveryWhatsAppUrl = createWhatsAppUrl("I'd like to request a delivery.", locale);
   const businessWhatsAppUrl = createWhatsAppUrl("I'd like to discuss deliveries for my business.", locale);
   return (
     <div className="min-h-screen bg-[#FAFAF8] dark:bg-[#101A15] text-[#1A1A1A] dark:text-[#F2F5F3] selection:bg-[#ECFDF5] dark:selection:bg-[#203C2E] selection:text-[#111111] dark:selection:text-[#F2F5F3] [&_a:focus-visible]:outline-2 [&_a:focus-visible]:outline-offset-4 [&_a:focus-visible]:outline-[#00875A]">
@@ -86,12 +86,16 @@ export default function Home() {
               <p className="mt-4 text-sm leading-6 text-gray-600 dark:text-[#B9C6BD] sm:text-base sm:leading-7 lg:font-medium">{t("Order your delivery on WhatsApp in just a few steps and let a local Toslo driver take care of the rest.")}</p>
               <Link href="#services" className="mt-5 inline-flex min-h-11 items-center gap-3 text-sm font-semibold text-gray-600 dark:text-[#B9C6BD] hover:text-[#007D53] dark:hover:text-[#69D5A3]">{t("Our services")}</Link>
             </div>
-            <div className="hidden gap-3 lg:col-start-1 lg:row-start-3 lg:flex lg:pb-6"><a href={deliveryWhatsAppUrl} className={whatsapp}>{t("Order on WhatsApp")}</a><a href={deliveryPhoneUrl} className={callUs}>{t("Call us")}</a></div>
+            <div className="hidden lg:col-start-1 lg:row-start-3 lg:block lg:pb-6">
+              <div className="flex gap-3"><OrderWhatsAppButton locale={locale} className={whatsapp} label={t("Order on WhatsApp")} /><a href={deliveryPhoneUrl} className={callUs}>{t("Call us")}</a></div>
+              <p className="mt-3 max-w-lg text-xs leading-5 text-gray-600 dark:text-[#B9C6BD]">{t("To help us arrange your delivery, include the pickup address, destination, item and preferred time in your WhatsApp message.")}</p>
+            </div>
             <div className="-order-1 min-w-0 lg:order-last lg:col-start-2 lg:row-start-1 lg:row-span-3">
               <HeroSlider locale={locale} />
               <div className="mx-auto mt-5 flex w-full max-w-lg flex-col gap-3 lg:hidden">
-                <a href={deliveryWhatsAppUrl} className={whatsapp}>{t("Order on WhatsApp")}</a>
+                <OrderWhatsAppButton locale={locale} className={whatsapp} label={t("Order on WhatsApp")} />
                 <a href={deliveryPhoneUrl} className={callUs}>{t("Call us")}</a>
+                <p className="text-center text-xs leading-5 text-gray-600 dark:text-[#B9C6BD]">{t("To help us arrange your delivery, include the pickup address, destination, item and preferred time in your WhatsApp message.")}</p>
               </div>
             </div>
           </div>
